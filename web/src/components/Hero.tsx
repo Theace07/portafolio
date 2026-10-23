@@ -34,7 +34,7 @@ export function Hero() {
         className="intro mt-4 max-w-[1180px] font-display text-[34px] font-bold leading-[1.04] tracking-[-0.03em] text-balance md:text-[52px] md:leading-[1] lg:mt-6 lg:text-[76px] lg:leading-[0.98] lg:tracking-[-0.035em]"
         style={delay(120)}
       >
-        <Scramble text={site.name} duration={1300} delay={150} />
+        {site.name}
       </h1>
 
       <div className="mt-7 grid items-start gap-10 md:mt-10 lg:mt-14 lg:grid-cols-12">
