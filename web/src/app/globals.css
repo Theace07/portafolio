@@ -402,6 +402,79 @@ section[id] {
   opacity: 1;
 }
 
+/* Cuadrícula de puntos del hero (<DotField>). */
+.dot-field {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, #000 50%, transparent);
+}
+
+/* Inclinación 3D siguiendo al cursor: <MotionLayer> pone --rx/--ry y
+   data-tilting. Al soltar vuelve a su sitio con una transición más lenta. */
+.tilt {
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition:
+    transform 0.7s var(--ease-out),
+    translate 0.3s var(--ease-out),
+    border-color 0.3s ease;
+}
+.tilt[data-tilting] {
+  transition:
+    transform 0.15s linear,
+    translate 0.3s var(--ease-out),
+    border-color 0.3s ease;
+}
+/* Reflejo que recorre la superficie inclinada. */
+.glare {
+  position: relative;
+}
+.glare::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    600px circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(255, 255, 255, 0.16),
+    transparent 45%
+  );
+  transition: opacity 0.4s ease;
+}
+.glare[data-tilting]::after {
+  opacity: 1;
+}
+
+/* Cinta infinita del stack. */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.marquee-inner {
+  animation: marquee 48s linear infinite;
+}
+.marquee:hover .marquee-inner {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+/* Texto con el degradado de la marca. (Un contorno con text-stroke no sirve
+   aquí: Syne es variable y sus contornos solapados dejan costuras.) */
+.gradient-text {
+  background: linear-gradient(90deg, var(--aqua), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* Destello que cruza el botón principal. */
 .shine {
   position: relative;
@@ -457,6 +530,7 @@ html[data-theme-switching] *::after {
     animation-duration: auto !important;
   }
   .caret,
+  .marquee-inner,
   .aura::before,
   .aura::after {
     animation: none !important;

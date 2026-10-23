@@ -44,6 +44,8 @@ export type Content = {
   hero: {
     /** Cargo, sobre el nombre. El titular es el nombre, como en un CV. */
     role: string;
+    /** Frases que se van escribiendo tras el cargo; la primera es la que se lee sin animación. */
+    roles: string[];
     lede: string;
     stats: Stat[];
     seeProjects: string;
@@ -126,6 +128,12 @@ const es: Content = {
   },
   hero: {
     role: "Front-End Developer Jr",
+    roles: [
+      "Front-End Developer Jr",
+      "React · Next.js · TypeScript",
+      "Interfaces rápidas y accesibles",
+      "Dashboards y e-commerce",
+    ],
     lede: "Desarrollador Front-End con más de un año creando interfaces responsivas y rápidas con React, Next.js, TypeScript y Tailwind CSS.",
     stats: [
       { value: "1+", label: "Años de experiencia" },
@@ -337,6 +345,12 @@ const en: Content = {
   },
   hero: {
     role: "Jr Front-End Developer",
+    roles: [
+      "Jr Front-End Developer",
+      "React · Next.js · TypeScript",
+      "Fast, accessible interfaces",
+      "Dashboards & e-commerce",
+    ],
     lede: "Front-End Developer with over a year building responsive, fast interfaces with React, Next.js, TypeScript and Tailwind CSS.",
     stats: [
       { value: "1+", label: "Years of experience" },

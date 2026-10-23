@@ -6,6 +6,8 @@ import { useSite } from "@/lib/site-context";
 import { site, sectionIds } from "@/lib/site";
 import { ArrowRight, ArrowUpRight } from "@/components/icons";
 import { Scramble } from "@/components/motion/Scramble";
+import { DotField } from "@/components/motion/DotField";
+import { Typewriter } from "@/components/motion/Typewriter";
 
 /** Retraso de entrada de cada bloque del hero, en milisegundos. */
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
@@ -17,11 +19,16 @@ export function Hero() {
   return (
     <section className="relative isolate px-5 pt-9 md:px-10 md:pt-14 lg:px-16 lg:pt-[74px]">
       <div className="aura" aria-hidden />
+      <DotField />
 
       <p className="tag intro m-0 flex items-center gap-3 text-accent" style={delay(0)}>
         <span className="grow-x block h-px w-8 bg-accent lg:w-11" style={delay(150)} aria-hidden />
-        {hero.role} · {hero.place}
-        <span className="caret" aria-hidden />
+        {/* En móvil el rol puede ocupar una o dos líneas según la frase:
+            se reservan dos para que el nombre no salte mientras se escribe. */}
+        <span className="min-h-[2lh] content-center md:min-h-0">
+          {hero.place} · <Typewriter words={hero.roles} />
+          <span className="caret" aria-hidden />
+        </span>
       </p>
       <h1
         className="intro mt-4 max-w-[1180px] font-display text-[34px] font-bold leading-[1.04] tracking-[-0.03em] text-balance md:text-[52px] md:leading-[1] lg:mt-6 lg:text-[76px] lg:leading-[0.98] lg:tracking-[-0.035em]"

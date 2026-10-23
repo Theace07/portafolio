@@ -66,7 +66,8 @@ export function Stack() {
           <article
             key={index}
             style={{ "--i": index } as CSSProperties}
-            className="spotlight group border border-line-soft bg-surface-2 px-[18px] py-4 transition-[border-color,transform] duration-300 hover:-translate-y-[3px] hover:border-accent lg:px-[22px] lg:py-5"
+            data-tilt="10"
+            className="spotlight tilt group border border-line-soft bg-surface-2 px-[18px] py-4 hover:-translate-y-[3px] hover:border-accent lg:px-[22px] lg:py-5"
           >
             <h3 className="flex items-center gap-2.5 text-base font-semibold lg:text-lg">
               <span
