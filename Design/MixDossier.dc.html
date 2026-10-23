@@ -1,0 +1,354 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #ECE6DA; }
+    a { color: #A8712A; text-decoration: none; }
+    a:hover { color: #7A4F16; }
+    .u { border-bottom: 1px solid rgba(168,113,42,0.4); padding-bottom: 3px; }
+    .u:hover { border-bottom-color: #7A4F16; }
+    .railnav { transition: color .16s ease, padding-left .16s ease; }
+    .railnav:hover { color: #EFE9DC; padding-left: 8px; }
+    .prow { transition: background .18s ease, padding-left .18s ease; }
+    .prow:hover { background: #E2DACB; padding-left: 16px; }
+    .pcard { transition: border-color .2s ease; }
+    .pcard:hover { border-color: #A8712A; }
+  </style>
+</helmet>
+
+<div style="display: grid; grid-template-columns: 440px 1fr; font-family: Manrope, 'Segoe UI', sans-serif; background: #ECE6DA; color: #191612; min-height: 100%;">
+
+  <!-- RAIL IZQUIERDO -->
+  <div style="background-color: #14120F; color: #EFE9DC; background-image: radial-gradient(rgba(255,255,255,0.035) 0.5px, transparent 0.5px); background-size: 3px 3px;">
+    <div style="position: sticky; top: 0; padding: 40px 36px; display: flex; flex-direction: column; gap: 30px;">
+
+      <div style="display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8B8074;">
+        <span>Dossier · 2026</span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; color: #D2A05A;">
+          <span style="display: block; width: 6px; height: 6px; border-radius: 50%; background: #D2A05A;"></span>
+          Disponible
+        </span>
+      </div>
+
+      <div style="border: 1px solid #322C25; padding: 9px;">
+        <div style="height: 380px; background-color: #1C1814; background-image: repeating-linear-gradient(128deg, rgba(210,160,90,0.13) 0 1px, transparent 1px 13px); display: flex; align-items: flex-end; padding: 18px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #8B8074;">[ Tu foto ]</div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 40px; line-height: 1.05; letter-spacing: -0.02em;">[TU NOMBRE]</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #D2A05A; margin-top: 12px;">Desarrollador Web · Full Stack</div>
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #2A2521; font-family: 'JetBrains Mono', monospace; font-size: 11px;">
+          <span style="color: #6F665C;">Base</span><span>[CIUDAD, PAÍS]</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #2A2521; font-family: 'JetBrains Mono', monospace; font-size: 11px;">
+          <span style="color: #6F665C;">Correo</span><span>[TU@CORREO.COM]</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #2A2521; font-family: 'JetBrains Mono', monospace; font-size: 11px;">
+          <span style="color: #6F665C;">Teléfono</span><span>[+TU TELÉFONO]</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #2A2521; border-bottom: 1px solid #2A2521; font-family: 'JetBrains Mono', monospace; font-size: 11px;">
+          <span style="color: #6F665C;">Idiomas</span><span>[ESPAÑOL · INGLÉS]</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 13px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">
+        <a class="railnav" href="#perfil" style="color: #9A9085;">01 — Perfil</a>
+        <a class="railnav" href="#stack" style="color: #9A9085;">02 — Stack</a>
+        <a class="railnav" href="#trayectoria" style="color: #9A9085;">03 — Trayectoria</a>
+        <a class="railnav" href="#proyectos" style="color: #9A9085;">04 — Proyectos</a>
+        <a class="railnav" href="#contacto" style="color: #9A9085;">05 — Contacto</a>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <a href="#cv" style="display: flex; align-items: center; justify-content: space-between; background: #D2A05A; color: #17120A; padding: 14px 18px; font-size: 13px; font-weight: 600;">
+          Descargar CV
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v13"></path><path d="M6 12l6 6 6-6"></path></svg>
+        </a>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px;">
+          <a href="https://github.com/[TU-USUARIO]" style="display: flex; align-items: center; justify-content: center; border: 1px solid #35302A; color: #EFE9DC; padding: 13px; font-size: 13px; font-weight: 600;">GitHub</a>
+          <a href="https://www.linkedin.com/in/[TU-PERFIL]" style="display: flex; align-items: center; justify-content: center; border: 1px solid #35302A; color: #EFE9DC; padding: 13px; font-size: 13px; font-weight: 600;">LinkedIn</a>
+        </div>
+      </div>
+
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E564D; border-top: 1px solid #2A2521; padding-top: 18px;">© 2026 [TU NOMBRE]<br>Todos los derechos reservados.</div>
+
+    </div>
+  </div>
+
+  <!-- COLUMNA DERECHA -->
+  <div style="padding: 0 0 60px 0;">
+
+    <!-- APERTURA -->
+    <div style="padding: 48px 64px 0 64px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8A7F6E; border-bottom: 1px solid #D2C9B8; padding-bottom: 14px;">
+        <span>Portafolio profesional</span>
+        <span>[CIUDAD, PAÍS] · Remoto</span>
+      </div>
+
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 82px; line-height: 0.99; letter-spacing: -0.025em; margin-top: 40px; max-width: 880px; text-wrap: pretty;">Ingeniería web con <span style="font-style: italic; color: #A8712A;">criterio</span> de producto.</div>
+
+      <div style="font-size: 19px; line-height: 1.7; color: #453E33; max-width: 640px; margin-top: 26px;">[UNA O DOS FRASES SOBRE TI: qué construyes, para quién y con qué resultado. Escríbelo como se lo dirías a un director técnico.]</div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #191612; border-bottom: 1px solid #D2C9B8; margin-top: 34px;">
+        <div style="padding: 20px 0;">
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 42px; line-height: 1; color: #A8712A;">[X]+</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A7F6E; margin-top: 9px;">Años construyendo</div>
+        </div>
+        <div style="padding: 20px 0 20px 26px; border-left: 1px solid #D2C9B8;">
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 42px; line-height: 1;">[X]</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A7F6E; margin-top: 9px;">En producción</div>
+        </div>
+        <div style="padding: 20px 0 20px 26px; border-left: 1px solid #D2C9B8;">
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 42px; line-height: 1;">[X]</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A7F6E; margin-top: 9px;">Equipos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 01 PERFIL -->
+    <div id="perfil" style="padding: 72px 64px 0 64px;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #A8712A;">01</span>
+        <span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 38px; letter-spacing: -0.02em;">Perfil</span>
+        <span style="flex-grow: 1; height: 1px; background: #D2C9B8;"></span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px; margin-top: 26px;">
+        <div style="font-size: 17px; line-height: 1.75; color: #2E2A22;">[PÁRRAFO 1 — tu recorrido: cómo llegaste al desarrollo, dónde trabajas hoy y qué tipo de problemas resuelves mejor que nadie.]</div>
+        <div style="font-size: 16px; line-height: 1.8; color: #5C5446;">[PÁRRAFO 2 — cómo trabajas dentro de un equipo, qué te importa del código y del producto, y qué buscas ahora.]</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 28px; border-top: 1px solid #D2C9B8;">
+        <div style="padding: 16px 0;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E;">Rol actual</div>
+          <div style="font-size: 15px; font-weight: 600; margin-top: 7px;">[TU ROL]</div>
+        </div>
+        <div style="padding: 16px 0 16px 22px; border-left: 1px solid #D2C9B8;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E;">Modalidad</div>
+          <div style="font-size: 15px; font-weight: 600; margin-top: 7px;">Remoto / Híbrido</div>
+        </div>
+        <div style="padding: 16px 0 16px 22px; border-left: 1px solid #D2C9B8;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E;">Sector</div>
+          <div style="font-size: 15px; font-weight: 600; margin-top: 7px;">[TU SECTOR]</div>
+        </div>
+        <div style="padding: 16px 0 16px 22px; border-left: 1px solid #D2C9B8;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E;">Estado</div>
+          <div style="font-size: 15px; font-weight: 600; margin-top: 7px; color: #A8712A;">Abierto a propuestas</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 STACK -->
+    <div id="stack" style="padding: 72px 64px 0 64px;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #A8712A;">02</span>
+        <span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 38px; letter-spacing: -0.02em;">Stack</span>
+        <span style="flex-grow: 1; height: 1px; background: #D2C9B8;"></span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E;">Sustituir por tu stack real</span>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <div style="display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 20px 0; border-top: 1px solid #191612;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E; padding-top: 4px;">Frontend</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 25px; line-height: 1.55; color: #201C16;">React · Next.js · TypeScript · JavaScript · Tailwind CSS · Sass · Vite</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 20px 0; border-top: 1px solid #D2C9B8;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E; padding-top: 4px;">Backend</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 25px; line-height: 1.55; color: #201C16;">Node.js · Express · NestJS · REST · GraphQL · JWT / OAuth</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 20px 0; border-top: 1px solid #D2C9B8;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E; padding-top: 4px;">Datos e infra</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 25px; line-height: 1.55; color: #201C16;">PostgreSQL · MongoDB · Prisma · Docker · AWS · Vercel · CI/CD</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 20px 0; border-top: 1px solid #D2C9B8; border-bottom: 1px solid #191612;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E; padding-top: 4px;">Herramientas</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 25px; line-height: 1.55; color: #201C16;">Git · GitHub Actions · Jest · Testing Library · Figma · Scrum</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 TRAYECTORIA -->
+    <div id="trayectoria" style="padding: 72px 64px 0 64px;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #A8712A;">03</span>
+        <span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 38px; letter-spacing: -0.02em;">Trayectoria</span>
+        <span style="flex-grow: 1; height: 1px; background: #D2C9B8;"></span>
+      </div>
+
+      <div style="margin-top: 24px;">
+
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid #191612;">
+          <div>
+            <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; line-height: 1; color: #A8712A;">[AÑO]</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E; margin-top: 9px;">— Actualidad</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; line-height: 1.15;">[CARGO ACTUAL]</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #6E6558;">[EMPRESA] · [CIUDAD / Remoto]</div>
+            <div style="font-size: 16px; line-height: 1.75; color: #5C5446; max-width: 640px; margin-top: 2px;">[Qué construyes y qué impacto tuvo. Añade una cifra si la tienes: rendimiento, usuarios, ingresos, tiempo de entrega.]</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 5px 11px; border: 1px solid #D2C9B8; color: #6E6558;">[TECNOLOGÍA]</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 5px 11px; border: 1px solid #D2C9B8; color: #6E6558;">[TECNOLOGÍA]</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 5px 11px; border: 1px solid #D2C9B8; color: #6E6558;">[TECNOLOGÍA]</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid #D2C9B8;">
+          <div>
+            <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; line-height: 1;">[AÑO]</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E; margin-top: 9px;">— [AÑO]</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; line-height: 1.15;">[CARGO ANTERIOR]</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #6E6558;">[EMPRESA] · [CIUDAD / Remoto]</div>
+            <div style="font-size: 16px; line-height: 1.75; color: #5C5446; max-width: 640px; margin-top: 2px;">[Responsabilidad principal y un logro concreto.]</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 5px 11px; border: 1px solid #D2C9B8; color: #6E6558;">[TECNOLOGÍA]</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 5px 11px; border: 1px solid #D2C9B8; color: #6E6558;">[TECNOLOGÍA]</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid #D2C9B8;">
+          <div>
+            <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; line-height: 1;">[AÑO]</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E; margin-top: 9px;">— [AÑO]</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; line-height: 1.15;">[PRIMER CARGO]</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #6E6558;">[EMPRESA] · [CIUDAD / Remoto]</div>
+            <div style="font-size: 16px; line-height: 1.75; color: #5C5446; max-width: 640px; margin-top: 2px;">[Con qué empezaste y qué aprendiste que hoy sigues aplicando.]</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid #D2C9B8; border-bottom: 1px solid #191612;">
+          <div>
+            <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; line-height: 1;">[AÑO]</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E; margin-top: 9px;">Formación</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; line-height: 1.15;">[TÍTULO O CERTIFICACIÓN]</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #6E6558;">[INSTITUCIÓN]</div>
+            <div style="font-size: 16px; line-height: 1.75; color: #5C5446; max-width: 640px; margin-top: 2px;">[Certificaciones relevantes: cloud, frameworks, metodologías.]</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 04 PROYECTOS -->
+    <div id="proyectos" style="padding: 72px 64px 0 64px;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #A8712A;">04</span>
+        <span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 38px; letter-spacing: -0.02em;">Proyectos</span>
+        <span style="flex-grow: 1; height: 1px; background: #D2C9B8;"></span>
+        <a class="u" href="https://github.com/[TU-USUARIO]?tab=repositories" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;">Todos en GitHub →</a>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; margin-top: 28px;">
+        <a class="pcard" href="https://github.com/[TU-USUARIO]/[REPO-1]" style="display: flex; flex-direction: column; border: 1px solid #D2C9B8; background: #F3EEE4; color: #191612;">
+          <div style="height: 240px; background-color: #E3DACA; background-image: repeating-linear-gradient(128deg, rgba(168,113,42,0.13) 0 1px, transparent 1px 13px); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #97897A;">[ Captura ]</div>
+          <div style="padding: 22px 24px 26px 24px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8A7F6E;">01 · Destacado</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px;">
+              <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 27px;">[NOMBRE DEL PROYECTO]</div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A8712A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+            </div>
+            <div style="font-size: 15px; line-height: 1.7; color: #5C5446;">[Qué problema resuelve, para quién y qué parte construiste tú.]</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #8A7F6E; margin-top: 4px;">[STACK · STACK · STACK]</div>
+          </div>
+        </a>
+
+        <a class="pcard" href="https://github.com/[TU-USUARIO]/[REPO-2]" style="display: flex; flex-direction: column; border: 1px solid #D2C9B8; background: #F3EEE4; color: #191612;">
+          <div style="height: 240px; background-color: #E3DACA; background-image: repeating-linear-gradient(128deg, rgba(168,113,42,0.13) 0 1px, transparent 1px 13px); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #97897A;">[ Captura ]</div>
+          <div style="padding: 22px 24px 26px 24px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8A7F6E;">02 · Destacado</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px;">
+              <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 27px;">[NOMBRE DEL PROYECTO]</div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A8712A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+            </div>
+            <div style="font-size: 15px; line-height: 1.7; color: #5C5446;">[Qué problema resuelve, para quién y qué parte construiste tú.]</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #8A7F6E; margin-top: 4px;">[STACK · STACK]</div>
+          </div>
+        </a>
+      </div>
+
+      <div style="margin-top: 32px;">
+        <a class="prow" href="https://github.com/[TU-USUARIO]/[REPO-3]" style="display: grid; grid-template-columns: 50px 1fr 260px 36px; gap: 20px; align-items: center; padding: 22px 0; border-top: 1px solid #191612; color: #191612;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A7F6E;">03</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 25px;">[NOMBRE DEL PROYECTO]</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #6E6558;">[STACK · STACK]</div>
+          <div style="text-align: right;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A8712A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+          </div>
+        </a>
+        <a class="prow" href="https://github.com/[TU-USUARIO]/[REPO-4]" style="display: grid; grid-template-columns: 50px 1fr 260px 36px; gap: 20px; align-items: center; padding: 22px 0; border-top: 1px solid #D2C9B8; color: #191612;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A7F6E;">04</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 25px;">[NOMBRE DEL PROYECTO]</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #6E6558;">[STACK · STACK]</div>
+          <div style="text-align: right;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A8712A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+          </div>
+        </a>
+        <a class="prow" href="https://github.com/[TU-USUARIO]/[REPO-5]" style="display: grid; grid-template-columns: 50px 1fr 260px 36px; gap: 20px; align-items: center; padding: 22px 0; border-top: 1px solid #D2C9B8; border-bottom: 1px solid #191612; color: #191612;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A7F6E;">05</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 25px;">[NOMBRE DEL PROYECTO]</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #6E6558;">[STACK · STACK]</div>
+          <div style="text-align: right;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A8712A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 05 CONTACTO -->
+    <div id="contacto" style="padding: 80px 64px 0 64px;">
+      <div style="background: #14120F; color: #EFE9DC; padding: 54px 48px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 36px; align-items: center;">
+        <div style="grid-column: span 7;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #D2A05A;">05 · Contacto</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 44px; line-height: 1.08; letter-spacing: -0.02em; margin-top: 16px;">¿Hablamos de tu <span style="font-style: italic; color: #D2A05A;">próximo</span> proyecto?</div>
+          <div style="font-size: 15px; line-height: 1.75; color: #A79D90; margin-top: 16px; max-width: 420px;">Cuéntame qué necesitas construir y te respondo en menos de 24 horas hábiles.</div>
+        </div>
+        <div style="grid-column: span 5; display: flex; flex-direction: column; gap: 10px;">
+          <a href="mailto:[TU@CORREO.COM]" style="display: flex; align-items: center; justify-content: space-between; background: #D2A05A; color: #17120A; padding: 16px 22px; font-size: 14px; font-weight: 600;">
+            [TU@CORREO.COM]
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="M12 5l7 7-7 7"></path></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/[TU-PERFIL]" style="display: flex; align-items: center; justify-content: space-between; border: 1px solid #4A3A24; color: #EFE9DC; padding: 16px 22px; font-size: 14px; font-weight: 600;">
+            LinkedIn
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D2A05A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+          </a>
+          <a href="https://github.com/[TU-USUARIO]" style="display: flex; align-items: center; justify-content: space-between; border: 1px solid #4A3A24; color: #EFE9DC; padding: 16px 22px; font-size: 14px; font-weight: 600;">
+            GitHub
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D2A05A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIE DE COLUMNA -->
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 32px; border-top: 1px solid #D2C9B8; margin: 44px 64px 0 64px; padding: 26px 0 0 0;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A7F6E;">© 2026 [TU NOMBRE] — Todos los derechos reservados.</div>
+      <div style="display: flex; gap: 24px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
+        <a class="u" href="https://www.linkedin.com/in/[TU-PERFIL]">LinkedIn</a>
+        <a class="u" href="https://github.com/[TU-USUARIO]">GitHub</a>
+        <a class="u" href="mailto:[TU@CORREO.COM]">Correo</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

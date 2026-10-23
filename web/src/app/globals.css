@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* El tema se controla con la clase .dark en <html>, no con la preferencia del sistema. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Tema claro (por defecto) */
+:root {
+  --bg: #eff3f3;
+  --surface: #ffffff;
+  --surface-2: #e5ecec;
+  --line: #c9d7d7;
+  --line-soft: #dbe4e4;
+  --fg: #0b1618;
+  --fg-2: #2d4145;
+  --muted: #5a6d71;
+  --faint: #84979a;
+  --accent: #6d3bd6;
+  --accent-strong: #5124ae;
+  --accent-fg: #ffffff;
+  --accent-wash: rgba(109, 59, 214, 0.06);
+  --accent-ring: rgba(109, 59, 214, 0.18);
+  --aqua: #0e7a6b;
+  --hatch: rgba(109, 59, 214, 0.13);
+  --grain: rgba(0, 0, 0, 0.03);
+  color-scheme: light;
+}
+
+/* Tema oscuro */
+.dark {
+  --bg: #0b1416;
+  --surface: #121e21;
+  --surface-2: #0f1a1d;
+  --line: #22343a;
+  --line-soft: #1a292e;
+  --fg: #e9f1f1;
+  --fg-2: #c0cfd1;
+  --muted: #86999c;
+  --faint: #5d7276;
+  --accent: #a97bff;
+  --accent-strong: #c4a6ff;
+  --accent-fg: #16092a;
+  --accent-wash: rgba(169, 123, 255, 0.09);
+  --accent-ring: rgba(169, 123, 255, 0.24);
+  --aqua: #5fd3c4;
+  --hatch: rgba(169, 123, 255, 0.15);
+  --grain: rgba(255, 255, 255, 0.035);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-wash: var(--accent-wash);
+  --color-accent-ring: var(--accent-ring);
+  --color-aqua: var(--aqua);
+
+  --font-sans: var(--font-manrope), "Segoe UI", system-ui, sans-serif;
+  --font-serif: var(--font-instrument), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "Courier New", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  background-image: radial-gradient(var(--grain) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Trama diagonal de los huecos de imagen */
+.hatch {
+  background-color: var(--surface);
+  background-image: repeating-linear-gradient(
+    128deg,
+    var(--hatch) 0 1px,
+    transparent 1px 13px
+  );
+}
+
+/* Deja desplazar en horizontal, pero sin mostrar la barra */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Etiqueta monoespaciada, en versalitas, que se repite por todo el sitio */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

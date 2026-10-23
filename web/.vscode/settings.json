@@ -1,0 +1,9 @@
+{
+  "//": "Tailwind v4 usa reglas propias (@theme, @custom-variant, @apply) que el validador de CSS de VS Code no conoce y marca como error. No son errores reales.",
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}

@@ -1,0 +1,335 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap">
+  <style>
+    html, body { margin: 0; scroll-behavior: smooth; background: #0B1416; }
+
+    .thm {
+      display: block; min-height: 100vh;
+      font-family: Manrope, 'Segoe UI', sans-serif;
+      color: var(--fg);
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--grain) 0.5px, transparent 0.5px);
+      background-size: 3px 3px;
+      transition: background-color .35s ease, color .35s ease;
+    }
+    .thm.dark {
+      --bg: #0B1416; --surface: #121E21; --surface-2: #0F1A1D;
+      --line: #22343A; --line-soft: #1A292E;
+      --fg: #E9F1F1; --fg-2: #C0CFD1; --muted: #86999C; --faint: #5D7276;
+      --accent: #A97BFF; --accent-strong: #C4A6FF; --accent-fg: #16092A;
+      --accent-wash: rgba(169,123,255,0.09); --accent-ring: rgba(169,123,255,0.24);
+      --aqua: #5FD3C4;
+      --hatch: rgba(169,123,255,0.15); --grain: rgba(255,255,255,0.035);
+    }
+    .thm.light {
+      --bg: #EFF3F3; --surface: #FFFFFF; --surface-2: #E5ECEC;
+      --line: #C9D7D7; --line-soft: #DBE4E4;
+      --fg: #0B1618; --fg-2: #2D4145; --muted: #5A6D71; --faint: #84979A;
+      --accent: #6D3BD6; --accent-strong: #5124AE; --accent-fg: #FFFFFF;
+      --accent-wash: rgba(109,59,214,0.06); --accent-ring: rgba(109,59,214,0.18);
+      --aqua: #0E7A6B;
+      --hatch: rgba(109,59,214,0.13); --grain: rgba(0,0,0,0.030);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    .u { border-bottom: 1px solid var(--accent-ring); padding-bottom: 3px; }
+    .navm { color: var(--muted); white-space: nowrap; }
+    .ibtn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      height: 44px; min-width: 44px; padding: 0 12px; margin: 0;
+      border: 1px solid var(--line); background: transparent; color: var(--fg);
+      cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .seg { display: inline-flex; height: 44px; border: 1px solid var(--line); }
+    .seg-b {
+      appearance: none; border: 0; background: transparent; color: var(--muted);
+      cursor: pointer; min-width: 44px; padding: 0 13px; margin: 0;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em;
+      transition: background .16s ease, color .16s ease;
+    }
+    .seg-b:hover { color: var(--fg); }
+    .seg-b.on { background: var(--accent); color: var(--accent-fg); }
+
+    .ph { background-color: var(--surface); background-image: repeating-linear-gradient(128deg, var(--hatch) 0 1px, transparent 1px 13px); }
+    .scroller { overflow-x: auto; }
+
+    .tab {
+      appearance: none; border: 1px solid var(--line); background: transparent;
+      color: var(--muted); cursor: pointer; padding: 0 16px; height: 44px; white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .tab.on { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+    .tcard { border: 1px solid var(--line-soft); background: var(--surface-2); padding: 16px 18px; }
+
+    .tl-rail { position: relative; min-width: 660px; padding-right: 20px; }
+    .tl-line { position: absolute; left: 0; right: 20%; top: 7px; height: 1px; background: var(--line); }
+    .tl-fill { position: absolute; left: 0; top: 6px; height: 3px; background: var(--accent); transition: width .35s cubic-bezier(.4,0,.2,1); }
+    .tl-nodes { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tl-node {
+      appearance: none; background: none; border: 0; padding: 0 10px 0 0; margin: 0;
+      text-align: left; cursor: pointer; font-family: inherit; color: var(--muted);
+      display: flex; flex-direction: column; gap: 10px; min-height: 44px;
+    }
+    .tl-dot { display: block; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line); transition: background .22s ease, box-shadow .22s ease; }
+    .tl-node.on { color: var(--fg); }
+    .tl-node.on .tl-dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 5px var(--accent-ring); }
+    .tl-year { font-family: 'JetBrains Mono', monospace; font-size: 15px; }
+    .tl-node.on .tl-year { color: var(--accent); }
+    .tl-co { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+    .tl-panel { border: 1px solid var(--line); background: var(--surface-2); padding: 24px 22px; margin-top: 26px; }
+    .chip { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 11px; border: 1px solid var(--line); color: var(--muted); }
+    .bul { display: flex; gap: 11px; align-items: flex-start; font-size: 15px; line-height: 1.65; color: var(--fg-2); }
+    .mark { display: block; width: 7px; height: 7px; margin-top: 8px; flex-shrink: 0; background: var(--aqua); }
+
+    .gdot { appearance: none; border: 0; background: var(--line); cursor: pointer; width: 26px; height: 4px; padding: 0; margin: 0; }
+    .gdot.on { background: var(--accent); width: 40px; }
+    .garrow {
+      appearance: none; width: 46px; height: 46px; border: 1px solid var(--line);
+      background: transparent; color: var(--fg); cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .gmedia { display: block; border: 1px solid var(--line); }
+    .sec-head { display: flex; align-items: baseline; gap: 12px; border-top: 1px solid var(--line); padding-top: 16px; }
+    .sec-n { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: var(--aqua); }
+    .sec-l { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .h2 { font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; line-height: 1.1; letter-spacing: -0.02em; margin-top: 16px; }
+    .it { font-style: italic; color: var(--accent); }
+  </style>
+</helmet>
+
+<div class="{{themeClass}}">
+
+  <!-- CABECERA -->
+  <div style="border-bottom: 1px solid var(--line);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 20px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">{{t.name}}</div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div class="seg" title="{{t.langTitle}}">
+          <button type="button" class="seg-b {{esCls}}" onClick="{{setEs}}">ES</button>
+          <button type="button" class="seg-b {{enCls}}" onClick="{{setEn}}">EN</button>
+        </div>
+        <button type="button" class="ibtn" onClick="{{toggleTheme}}" title="{{t.themeTitle}}" style="padding: 0; width: 44px;">
+          <sc-if value="{{isDark}}" hint-placeholder-val="{{true}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2.2"></path><path d="M12 19.3v2.2"></path><path d="M4.2 4.2l1.6 1.6"></path><path d="M18.2 18.2l1.6 1.6"></path><path d="M2.5 12h2.2"></path><path d="M19.3 12h2.2"></path><path d="M4.2 19.8l1.6-1.6"></path><path d="M18.2 5.8l1.6-1.6"></path></svg>
+          </sc-if>
+          <sc-if value="{{isLight}}" hint-placeholder-val="{{false}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a6.6 6.6 0 0 0 9.5 9.5z"></path></svg>
+          </sc-if>
+        </button>
+      </div>
+    </div>
+    <div class="scroller" style="border-top: 1px solid var(--line-soft);">
+      <div style="display: flex; gap: 20px; padding: 12px 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
+        <sc-for list="{{t.nav}}" as="n" hint-placeholder-count="5">
+          <a class="navm" href="{{n.href}}">{{n.label}}</a>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div style="padding: 36px 20px 0 20px;">
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 42px; line-height: 1.02; letter-spacing: -0.02em; text-wrap: pretty;">{{t.heroA}} <span class="it">{{t.heroB}}</span> {{t.heroC}}</div>
+
+    <div style="border: 1px solid var(--line); padding: 8px; background: var(--surface-2); margin-top: 28px;">
+      <div class="ph" style="height: 340px; display: flex; align-items: flex-end; padding: 16px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">{{t.photo}}</div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-top: 9px;">
+      <span>{{t.fig}}</span>
+      <span>{{t.figPlace}}</span>
+    </div>
+
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.5; color: var(--fg-2); margin-top: 26px;">{{t.lede}}</div>
+
+    <div style="display: flex; flex-direction: column; margin-top: 24px; border-bottom: 1px solid var(--line);">
+      <sc-for list="{{t.stats}}" as="s" hint-placeholder-count="3">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line);">
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 34px; line-height: 1;">{{s.n}}</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: right;">{{s.l}}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 24px;">
+      <a href="#proyectos" style="display: flex; align-items: center; justify-content: space-between; background: var(--accent); color: var(--accent-fg); padding: 16px 22px; font-size: 15px; font-weight: 600;">
+        {{t.ctaProy}}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="M12 5l7 7-7 7"></path></svg>
+      </a>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+        <a href="https://github.com/[TU-USUARIO]" style="display: flex; align-items: center; justify-content: center; padding: 16px; border: 1px solid var(--line); color: var(--fg); font-size: 14px; font-weight: 600;">GitHub</a>
+        <a href="https://www.linkedin.com/in/[TU-PERFIL]" style="display: flex; align-items: center; justify-content: center; padding: 16px; border: 1px solid var(--line); color: var(--fg); font-size: 14px; font-weight: 600;">LinkedIn</a>
+      </div>
+      <a class="u" href="#cv" style="align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 6px;">{{t.cv}} ↓</a>
+    </div>
+  </div>
+
+  <!-- 01 PERFIL -->
+  <div id="perfil" style="padding: 56px 20px 0 20px;">
+    <div class="sec-head"><span class="sec-n">§ 01</span><span class="sec-l">{{t.secPerfil}}</span></div>
+    <div class="h2">{{t.perfilT1}} <span class="it">{{t.perfilT2}}</span></div>
+    <div style="font-size: 16px; line-height: 1.75; color: var(--fg-2); margin-top: 18px;">{{t.perfilP1}}</div>
+    <div style="font-size: 15px; line-height: 1.8; color: var(--muted); margin-top: 14px;">{{t.perfilP2}}</div>
+    <div style="display: flex; flex-direction: column; margin-top: 20px;">
+      <sc-for list="{{t.perfilMeta}}" as="m" hint-placeholder-count="4">
+        <div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 11px;">
+          <span style="color: var(--faint);">{{m.k}}</span><span style="text-align: right;">{{m.v}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- 02 STACK -->
+  <div id="stack" style="padding: 56px 0 0 0;">
+    <div style="padding: 0 20px;">
+      <div class="sec-head"><span class="sec-n">§ 02</span><span class="sec-l">{{t.secStack}}</span></div>
+      <div class="h2">{{t.stackT1}} <span class="it">{{t.stackT2}}</span></div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 12px;">{{t.stackHint}}</div>
+    </div>
+    <div class="scroller" style="margin-top: 20px;">
+      <div style="display: flex; gap: 8px; padding: 0 20px;">
+        <sc-for list="{{tabs}}" as="tb" hint-placeholder-count="4">
+          <button type="button" class="tab {{tb.cls}}" onClick="{{tb.pick}}">{{tb.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px; padding: 0 20px;">
+      <sc-for list="{{stackItems}}" as="it" hint-placeholder-count="6">
+        <div class="tcard">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="display: block; width: 7px; height: 7px; background: var(--aqua);"></span>
+            <span style="font-size: 16px; font-weight: 600;">{{it.name}}</span>
+          </div>
+          <div style="font-size: 13px; line-height: 1.6; color: var(--muted); margin-top: 8px;">{{it.note}}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- 03 TRAYECTORIA -->
+  <div id="trayectoria" style="padding: 56px 0 0 0;">
+    <div style="padding: 0 20px;">
+      <div class="sec-head"><span class="sec-n">§ 03</span><span class="sec-l">{{t.secTray}}</span></div>
+      <div class="h2">{{t.trayT1}} <span class="it">{{t.trayT2}}</span> {{t.trayT3}}</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 12px;">{{t.trayHint}}</div>
+    </div>
+
+    <div class="scroller" style="margin-top: 24px; padding: 0 20px;">
+      <div class="tl-rail">
+        <div class="tl-line"></div>
+        <div class="tl-fill" style="width: {{fill}}"></div>
+        <div class="tl-nodes">
+          <sc-for list="{{nodes}}" as="h" hint-placeholder-count="5">
+            <button type="button" class="tl-node {{h.cls}}" onClick="{{h.pick}}">
+              <span class="tl-dot"></span>
+              <span class="tl-year">{{h.year}}</span>
+              <span class="tl-co">{{h.org}}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding: 0 20px;">
+      <div class="tl-panel">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);">{{hito.period}}</div>
+        <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 27px; line-height: 1.12; margin-top: 10px;">{{hito.role}}</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 9px;">{{hito.place}}</div>
+        <div style="font-size: 15px; line-height: 1.75; color: var(--fg-2); margin-top: 16px;">{{hito.desc}}</div>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 16px;">
+          <sc-for list="{{hito.bullets}}" as="b" hint-placeholder-count="3">
+            <div class="bul"><span class="mark"></span><span>{{b.t}}</span></div>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;">
+          <sc-for list="{{hito.chips}}" as="c" hint-placeholder-count="3">
+            <span class="chip">{{c.c}}</span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 PROYECTOS -->
+  <div id="proyectos" style="padding: 56px 20px 0 20px;">
+    <div class="sec-head"><span class="sec-n">§ 04</span><span class="sec-l">{{t.secProy}}</span></div>
+    <div class="h2">{{t.proyT1}} <span class="it">{{t.proyT2}}</span></div>
+
+    <a class="gmedia" href="{{proj.url}}" style="margin-top: 22px;">
+      <div class="ph" style="height: 230px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);">{{t.capture}}</div>
+    </a>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 16px;">
+      <span style="color: var(--aqua);">{{counter}}</span>
+      <span style="color: var(--faint); text-align: right;">{{proj.stack}}</span>
+    </div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; line-height: 1.12; margin-top: 10px;">{{proj.name}}</div>
+    <div style="font-size: 15px; line-height: 1.7; color: var(--muted); margin-top: 10px;">{{proj.desc}}</div>
+    <a href="{{proj.url}}" style="display: flex; align-items: center; justify-content: space-between; background: var(--accent); color: var(--accent-fg); padding: 16px 20px; font-size: 15px; font-weight: 600; margin-top: 18px;">
+      {{t.proyCta}}
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+    </a>
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 18px; border-top: 1px solid var(--line); padding-top: 18px;">
+      <div style="display: flex; gap: 6px;">
+        <sc-for list="{{dots}}" as="d" hint-placeholder-count="5">
+          <button type="button" class="gdot {{d.cls}}" onClick="{{d.pick}}" title="{{d.title}}"></button>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button type="button" class="garrow" onClick="{{prevProj}}" title="{{t.prev}}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H6"></path><path d="M12 5l-7 7 7 7"></path></svg>
+        </button>
+        <button type="button" class="garrow" onClick="{{nextProj}}" title="{{t.next}}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="M12 5l7 7-7 7"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 CONTACTO -->
+  <div id="contacto" style="padding: 60px 20px 0 20px;">
+    <div style="border: 1px solid var(--line); background: var(--accent-wash); padding: 28px 22px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--aqua);">§ 05 · {{t.secCont}}</div>
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; margin-top: 14px;">{{t.contT1}} <span class="it">{{t.contT2}}</span> {{t.contT3}}</div>
+      <div style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-top: 12px;">{{t.contSub}}</div>
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 22px;">
+        <a href="mailto:[TU@CORREO.COM]" style="display: flex; align-items: center; justify-content: space-between; background: var(--accent); color: var(--accent-fg); padding: 15px 18px; font-size: 14px; font-weight: 600;">
+          [TU@CORREO.COM]
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="M12 5l7 7-7 7"></path></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/[TU-PERFIL]" style="display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--line); color: var(--fg); padding: 15px 18px; font-size: 14px; font-weight: 600;">LinkedIn →</a>
+        <a href="https://github.com/[TU-USUARIO]" style="display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--line); color: var(--fg); padding: 15px 18px; font-size: 14px; font-weight: 600;">GitHub →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIE -->
+  <div style="margin-top: 56px; border-top: 1px solid var(--line); padding: 26px 20px 0 20px;">
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px;">{{t.name}}</div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 8px;">[TU@CORREO.COM]</div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 5px;">[+TU TELÉFONO]</div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 5px;">{{t.figPlace}} · {{t.remote}}</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 18px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 18px;">
+      <a class="u" href="https://www.linkedin.com/in/[TU-PERFIL]">LinkedIn</a>
+      <a class="u" href="https://github.com/[TU-USUARIO]">GitHub</a>
+      <a class="u" href="mailto:[TU@CORREO.COM]">{{t.mail}}</a>
+      <a class="u" href="#cv">{{t.cvPdf}}</a>
+    </div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin: 24px 0 32px 0;">© 2026 {{t.name}} — {{t.rights}}</div>
+  </div>
+
+</div>
+</x-dc>
+<!--LOGIC-->
+</body>
+</html>

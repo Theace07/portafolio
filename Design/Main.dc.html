@@ -1,0 +1,690 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap">
+  <style>
+    html, body { margin: 0; scroll-behavior: smooth; background: #0B1416; }
+
+    .thm {
+      display: block; min-height: 100vh;
+      font-family: Manrope, 'Segoe UI', sans-serif;
+      color: var(--fg);
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--grain) 0.5px, transparent 0.5px);
+      background-size: 3px 3px;
+      transition: background-color .35s ease, color .35s ease;
+    }
+    .thm.dark {
+      --bg: #0B1416; --surface: #121E21; --surface-2: #0F1A1D;
+      --line: #22343A; --line-soft: #1A292E;
+      --fg: #E9F1F1; --fg-2: #C0CFD1; --muted: #86999C; --faint: #5D7276;
+      --accent: #A97BFF; --accent-strong: #C4A6FF; --accent-fg: #16092A;
+      --accent-wash: rgba(169,123,255,0.09); --accent-ring: rgba(169,123,255,0.24);
+      --aqua: #5FD3C4;
+      --hatch: rgba(169,123,255,0.15); --grain: rgba(255,255,255,0.035);
+    }
+    .thm.light {
+      --bg: #EFF3F3; --surface: #FFFFFF; --surface-2: #E5ECEC;
+      --line: #C9D7D7; --line-soft: #DBE4E4;
+      --fg: #0B1618; --fg-2: #2D4145; --muted: #5A6D71; --faint: #84979A;
+      --accent: #6D3BD6; --accent-strong: #5124AE; --accent-fg: #FFFFFF;
+      --accent-wash: rgba(109,59,214,0.06); --accent-ring: rgba(109,59,214,0.18);
+      --aqua: #0E7A6B;
+      --hatch: rgba(109,59,214,0.13); --grain: rgba(0,0,0,0.030);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-strong); }
+    .u { border-bottom: 1px solid var(--accent-ring); padding-bottom: 3px; }
+    .u:hover { border-bottom-color: var(--accent-strong); }
+    .navm { color: var(--muted); transition: color .16s ease; }
+    .navm:hover { color: var(--accent); }
+
+    .ibtn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 44px; min-width: 44px; padding: 0 12px; margin: 0;
+      border: 1px solid var(--line); background: transparent; color: var(--fg);
+      cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      transition: border-color .16s ease, background .16s ease, color .16s ease;
+    }
+    .ibtn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-wash); }
+
+    .card { border: 1px solid var(--line); background: var(--surface-2); transition: border-color .2s ease, transform .2s ease; }
+    .card:hover { border-color: var(--accent); }
+    .seg { display: inline-flex; height: 44px; border: 1px solid var(--line); }
+    .seg-b {
+      appearance: none; border: 0; background: transparent; color: var(--muted);
+      cursor: pointer; min-width: 44px; padding: 0 13px; margin: 0;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em;
+      transition: background .16s ease, color .16s ease;
+    }
+    .seg-b:hover { color: var(--fg); }
+    .seg-b.on { background: var(--accent); color: var(--accent-fg); }
+
+    .ph { background-color: var(--surface); background-image: repeating-linear-gradient(128deg, var(--hatch) 0 1px, transparent 1px 13px); }
+
+    /* Stack con pestañas */
+    .tab {
+      appearance: none; border: 1px solid var(--line); background: transparent;
+      color: var(--muted); cursor: pointer; padding: 0 20px; height: 44px;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: color .16s ease, border-color .16s ease, background .16s ease;
+    }
+    .tab:hover { color: var(--fg); border-color: var(--accent); }
+    .tab.on { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+    .tcard { border: 1px solid var(--line-soft); background: var(--surface-2); padding: 20px 22px; transition: border-color .18s ease, transform .18s ease; }
+    .tcard:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+    /* Línea de tiempo */
+    .tl-rail { position: relative; margin-top: 34px; }
+    .tl-line { position: absolute; left: 0; right: 20%; top: 7px; height: 1px; background: var(--line); }
+    .tl-fill { position: absolute; left: 0; top: 6px; height: 3px; background: var(--accent); transition: width .35s cubic-bezier(.4,0,.2,1); }
+    .tl-nodes { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tl-node {
+      appearance: none; background: none; border: 0; padding: 0 16px 0 0; margin: 0;
+      text-align: left; cursor: pointer; font-family: inherit; color: var(--muted);
+      display: flex; flex-direction: column; gap: 12px; min-height: 44px; transition: color .18s ease;
+    }
+    .tl-node:hover { color: var(--fg); }
+    .tl-dot {
+      display: block; width: 15px; height: 15px; border-radius: 50%;
+      background: var(--bg); border: 1px solid var(--line);
+      transition: background .22s ease, border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+    }
+    .tl-node:hover .tl-dot { border-color: var(--accent); }
+    .tl-node.on { color: var(--fg); }
+    .tl-node.on .tl-dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 6px var(--accent-ring); transform: scale(1.08); }
+    .tl-year { font-family: 'JetBrains Mono', monospace; font-size: 19px; }
+    .tl-node.on .tl-year { color: var(--accent); }
+    .tl-co { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+    .tl-panel { border: 1px solid var(--line); background: var(--surface-2); padding: 40px 44px; margin-top: 46px; }
+    .chip { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 12px; border: 1px solid var(--line); color: var(--muted); }
+    .bul { display: flex; gap: 14px; align-items: flex-start; font-size: 16px; line-height: 1.7; color: var(--fg-2); }
+    .mark { display: block; width: 7px; height: 7px; margin-top: 9px; flex-shrink: 0; background: var(--aqua); }
+
+    /* Galería de proyectos */
+    .gdot {
+      appearance: none; border: 0; background: var(--line); cursor: pointer;
+      width: 34px; height: 4px; padding: 0; margin: 0; transition: background .2s ease, width .2s ease;
+    }
+    .gdot:hover { background: var(--muted); }
+    .gdot.on { background: var(--accent); width: 52px; }
+    .garrow {
+      appearance: none; width: 44px; height: 44px; border: 1px solid var(--line);
+      background: transparent; color: var(--fg); cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: border-color .16s ease, background .16s ease, color .16s ease;
+    }
+    .garrow:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-wash); }
+    .gmedia { display: block; position: relative; overflow: hidden; border: 1px solid var(--line); }
+    .gmedia:hover { border-color: var(--accent); }
+  </style>
+</helmet>
+
+<div class="{{themeClass}}">
+
+  <!-- CABECERA -->
+  <div style="border-bottom: 1px solid var(--line);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 14px 64px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg);">{{t.name}}</div>
+      <div style="display: flex; gap: 30px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">
+        <sc-for list="{{t.nav}}" as="n" hint-placeholder-count="5">
+          <a class="navm" href="{{n.href}}">{{n.label}}</a>
+        </sc-for>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="seg" title="{{t.langTitle}}">
+          <button type="button" class="seg-b {{esCls}}" onClick="{{setEs}}">ES</button>
+          <button type="button" class="seg-b {{enCls}}" onClick="{{setEn}}">EN</button>
+        </div>
+        <button type="button" class="ibtn" onClick="{{toggleTheme}}" title="{{t.themeTitle}}" style="padding: 0; width: 44px;">
+          <sc-if value="{{isDark}}" hint-placeholder-val="{{true}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2.2"></path><path d="M12 19.3v2.2"></path><path d="M4.2 4.2l1.6 1.6"></path><path d="M18.2 18.2l1.6 1.6"></path><path d="M2.5 12h2.2"></path><path d="M19.3 12h2.2"></path><path d="M4.2 19.8l1.6-1.6"></path><path d="M18.2 5.8l1.6-1.6"></path></svg>
+          </sc-if>
+          <sc-if value="{{isLight}}" hint-placeholder-val="{{false}}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a6.6 6.6 0 0 0 9.5 9.5z"></path></svg>
+          </sc-if>
+        </button>
+        <a class="u" href="#cv" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">{{t.cv}} ↓</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div style="padding: 74px 64px 0 64px;">
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 108px; line-height: 0.96; letter-spacing: -0.025em; max-width: 1180px; text-wrap: pretty;">{{t.heroA}} <span style="font-style: italic; color: var(--accent);">{{t.heroB}}</span> {{t.heroC}}</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; padding: 56px 64px 0 64px; align-items: start;">
+    <div style="grid-column: span 5;">
+      <div style="border: 1px solid var(--line); padding: 10px; background: var(--surface-2);">
+        <div class="ph" style="height: 460px; display: flex; align-items: flex-end; padding: 20px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">{{t.photo}}</div>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-top: 12px;">
+        <span>{{t.fig}}</span>
+        <span>{{t.figPlace}}</span>
+      </div>
+    </div>
+
+    <div style="grid-column: span 7; display: flex; flex-direction: column; gap: 30px;">
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 25px; line-height: 1.5; color: var(--fg-2); max-width: 600px;">{{t.lede}}</div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+        <sc-for list="{{t.stats}}" as="s" hint-placeholder-count="3">
+          <div style="padding: 22px 26px 22px 0;">
+            <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 46px; line-height: 1;">{{s.n}}</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 9px;">{{s.l}}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="#proyectos" style="display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--accent-fg); padding: 15px 28px; font-size: 14px; font-weight: 600;">
+          {{t.ctaProy}}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="M12 5l7 7-7 7"></path></svg>
+        </a>
+        <a href="https://github.com/[TU-USUARIO]" style="display: inline-flex; align-items: center; padding: 15px 26px; border: 1px solid var(--line); color: var(--fg); font-size: 14px; font-weight: 600;">GitHub</a>
+        <a href="https://www.linkedin.com/in/[TU-PERFIL]" style="display: inline-flex; align-items: center; padding: 15px 26px; border: 1px solid var(--line); color: var(--fg); font-size: 14px; font-weight: 600;">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 PERFIL -->
+  <div id="perfil" style="padding: 96px 64px 0 64px;">
+    <div style="display: flex; align-items: baseline; gap: 20px; border-top: 1px solid var(--line); padding-top: 20px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: var(--aqua);">§ 01</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);">{{t.secPerfil}}</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; margin-top: 34px;">
+      <div style="grid-column: span 5;">
+        <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 46px; line-height: 1.08; letter-spacing: -0.02em;">{{t.perfilT1}} <span style="font-style: italic; color: var(--accent);">{{t.perfilT2}}</span></div>
+      </div>
+      <div style="grid-column: span 7; display: flex; flex-direction: column; gap: 20px;">
+        <div style="font-size: 18px; line-height: 1.75; color: var(--fg-2);">{{t.perfilP1}}</div>
+        <div style="font-size: 16px; line-height: 1.8; color: var(--muted);">{{t.perfilP2}}</div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 52px; margin-top: 12px;">
+          <sc-for list="{{t.perfilMeta}}" as="m" hint-placeholder-count="4">
+            <div style="display: flex; justify-content: space-between; padding: 14px 0; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 12px;">
+              <span style="color: var(--faint);">{{m.k}}</span><span>{{m.v}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 STACK -->
+  <div id="stack" style="padding: 96px 64px 0 64px;">
+    <div style="display: flex; align-items: baseline; gap: 20px; border-top: 1px solid var(--line); padding-top: 20px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: var(--aqua);">§ 02</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);">{{t.secStack}}</span>
+      <span style="flex-grow: 1;"></span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">{{t.stackHint}}</span>
+    </div>
+
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-top: 26px;">
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 46px; line-height: 1.08; letter-spacing: -0.02em;">{{t.stackT1}} <span style="font-style: italic; color: var(--accent);">{{t.stackT2}}</span></div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <sc-for list="{{tabs}}" as="tb" hint-placeholder-count="4">
+          <button type="button" class="tab {{tb.cls}}" onClick="{{tb.pick}}">{{tb.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 30px;">
+      <sc-for list="{{stackItems}}" as="it" hint-placeholder-count="6">
+        <div class="tcard">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="display: block; width: 7px; height: 7px; background: var(--aqua);"></span>
+            <span style="font-size: 18px; font-weight: 600;">{{it.name}}</span>
+          </div>
+          <div style="font-size: 14px; line-height: 1.6; color: var(--muted); margin-top: 10px;">{{it.note}}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- 03 TRAYECTORIA -->
+  <div id="trayectoria" style="padding: 96px 64px 0 64px;">
+    <div style="display: flex; align-items: baseline; gap: 20px; border-top: 1px solid var(--line); padding-top: 20px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: var(--aqua);">§ 03</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);">{{t.secTray}}</span>
+      <span style="flex-grow: 1;"></span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">{{t.trayHint}}</span>
+    </div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 46px; line-height: 1.08; letter-spacing: -0.02em; margin-top: 26px;">{{t.trayT1}} <span style="font-style: italic; color: var(--accent);">{{t.trayT2}}</span> {{t.trayT3}}</div>
+
+    <div class="tl-rail">
+      <div class="tl-line"></div>
+      <div class="tl-fill" style="width: {{fill}}"></div>
+      <div class="tl-nodes">
+        <sc-for list="{{nodes}}" as="h" hint-placeholder-count="5">
+          <button type="button" class="tl-node {{h.cls}}" onClick="{{h.pick}}">
+            <span class="tl-dot"></span>
+            <span class="tl-year">{{h.year}}</span>
+            <span class="tl-co">{{h.org}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div class="tl-panel">
+      <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px;">
+        <div style="grid-column: span 5;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);">{{hito.period}}</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 38px; line-height: 1.1; margin-top: 14px;">{{hito.role}}</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 12px;">{{hito.place}}</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px;">
+            <sc-for list="{{hito.chips}}" as="c" hint-placeholder-count="3">
+              <span class="chip">{{c.c}}</span>
+            </sc-for>
+          </div>
+        </div>
+        <div style="grid-column: span 7; display: flex; flex-direction: column; gap: 18px;">
+          <div style="font-size: 17px; line-height: 1.75; color: var(--fg-2);">{{hito.desc}}</div>
+          <sc-for list="{{hito.bullets}}" as="b" hint-placeholder-count="3">
+            <div class="bul"><span class="mark"></span><span>{{b.t}}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 PROYECTOS -->
+  <div id="proyectos" style="padding: 96px 64px 0 64px;">
+    <div style="display: flex; align-items: baseline; gap: 20px; border-top: 1px solid var(--line); padding-top: 20px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: var(--aqua);">§ 04</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);">{{t.secProy}}</span>
+      <span style="flex-grow: 1;"></span>
+      <a class="u" href="https://github.com/[TU-USUARIO]?tab=repositories" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">{{t.proyAll}} →</a>
+    </div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 46px; line-height: 1.08; letter-spacing: -0.02em; margin-top: 26px;">{{t.proyT1}} <span style="font-style: italic; color: var(--accent);">{{t.proyT2}}</span></div>
+
+    <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; margin-top: 36px; align-items: start;">
+      <a class="gmedia" href="{{proj.url}}" style="grid-column: span 7;">
+        <div class="ph" style="height: 420px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint);">{{t.capture}}</div>
+      </a>
+
+      <div style="grid-column: span 5; display: flex; flex-direction: column; gap: 18px; padding-top: 4px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;">
+          <span style="color: var(--aqua);">{{counter}}</span>
+          <span style="color: var(--faint);">{{proj.stack}}</span>
+        </div>
+        <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 40px; line-height: 1.08;">{{proj.name}}</div>
+        <div style="font-size: 16px; line-height: 1.75; color: var(--muted);">{{proj.desc}}</div>
+        <a href="{{proj.url}}" style="display: inline-flex; align-items: center; justify-content: space-between; background: var(--accent); color: var(--accent-fg); padding: 16px 24px; font-size: 15px; font-weight: 600; margin-top: 6px;">
+          {{t.proyCta}}
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+        </a>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 10px; border-top: 1px solid var(--line); padding-top: 22px;">
+          <div style="display: flex; gap: 8px;">
+            <sc-for list="{{dots}}" as="d" hint-placeholder-count="5">
+              <button type="button" class="gdot {{d.cls}}" onClick="{{d.pick}}" title="{{d.title}}"></button>
+            </sc-for>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="garrow" onClick="{{prevProj}}" title="{{t.prev}}">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H6"></path><path d="M12 5l-7 7 7 7"></path></svg>
+            </button>
+            <button type="button" class="garrow" onClick="{{nextProj}}" title="{{t.next}}">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="M12 5l7 7-7 7"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 CONTACTO -->
+  <div id="contacto" style="padding: 110px 64px 0 64px;">
+    <div style="border: 1px solid var(--line); background: var(--accent-wash); padding: 66px 60px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center;">
+      <div style="grid-column: span 7;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--aqua);">§ 05 · {{t.secCont}}</div>
+        <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 52px; line-height: 1.06; letter-spacing: -0.02em; margin-top: 18px;">{{t.contT1}} <span style="font-style: italic; color: var(--accent);">{{t.contT2}}</span> {{t.contT3}}</div>
+        <div style="font-size: 16px; line-height: 1.75; color: var(--muted); margin-top: 18px; max-width: 480px;">{{t.contSub}}</div>
+      </div>
+      <div style="grid-column: span 5; display: flex; flex-direction: column; gap: 11px;">
+        <a href="mailto:[TU@CORREO.COM]" style="display: flex; align-items: center; justify-content: space-between; background: var(--accent); color: var(--accent-fg); padding: 18px 24px; font-size: 15px; font-weight: 600;">
+          [TU@CORREO.COM]
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="M12 5l7 7-7 7"></path></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/[TU-PERFIL]" style="display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--line); color: var(--fg); padding: 18px 24px; font-size: 15px; font-weight: 600;">
+          LinkedIn
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+        </a>
+        <a href="https://github.com/[TU-USUARIO]" style="display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--line); color: var(--fg); padding: 18px 24px; font-size: 15px; font-weight: 600;">
+          GitHub
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIE -->
+  <div style="margin-top: 96px; border-top: 1px solid var(--line); padding: 40px 64px 0 64px; display: flex; align-items: flex-start; justify-content: space-between; gap: 40px;">
+    <div style="display: flex; flex-direction: column; gap: 9px;">
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px;">{{t.name}}</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted);">[TU@CORREO.COM] · [+TU TELÉFONO]</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted);">{{t.figPlace}} · {{t.remote}}</div>
+    </div>
+    <div style="display: flex; gap: 28px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">
+      <a class="u" href="https://www.linkedin.com/in/[TU-PERFIL]">LinkedIn</a>
+      <a class="u" href="https://github.com/[TU-USUARIO]">GitHub</a>
+      <a class="u" href="mailto:[TU@CORREO.COM]">{{t.mail}}</a>
+      <a class="u" href="#cv">{{t.cvPdf}}</a>
+    </div>
+  </div>
+  <div style="padding: 34px 64px 42px 64px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);">© 2026 {{t.name}} — {{t.rights}}</div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"theme": {"editor": "enum", "options": ["oscuro", "claro"], "default": "oscuro", "section": "Ajustes"}, "lang": {"editor": "enum", "options": ["es", "en"], "default": "es", "section": "Ajustes"}, "$preview": {"width": 1440, "height": 4500}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { theme: null, lang: null, hito: 4, cat: 0, proj: 0 };
+  }
+
+  dict() {
+    const es = {
+      name: '[TU NOMBRE]',
+      nav: [
+        { label: '01 Perfil', href: '#perfil' },
+        { label: '02 Stack', href: '#stack' },
+        { label: '03 Trayectoria', href: '#trayectoria' },
+        { label: '04 Proyectos', href: '#proyectos' },
+        { label: '05 Contacto', href: '#contacto' }
+      ],
+      cv: 'Descargar CV', cvPdf: 'CV en PDF', mail: 'Correo',
+      langNext: 'EN', langTitle: 'Switch to English', themeTitle: 'Cambiar tema',
+      heroA: 'Ingeniería web con', heroB: 'criterio', heroC: 'de producto y obsesión por el detalle.',
+      lede: '[UNA O DOS FRASES SOBRE TI: qué construyes, para quién y con qué resultado. Escríbelo con voz propia, como abriría un buen perfil.]',
+      stats: [
+        { n: '[X]+', l: 'Años construyendo' },
+        { n: '[X]', l: 'En producción' },
+        { n: '[X]', l: 'Equipos' }
+      ],
+      ctaProy: 'Ver proyectos', photo: '[ Tu foto ]', fig: 'Fig. 01', figPlace: '[CIUDAD, PAÍS]',
+      remote: 'Disponible en remoto', rights: 'Todos los derechos reservados.',
+      secPerfil: 'Perfil', secStack: 'Stack', secTray: 'Trayectoria', secProy: 'Proyectos', secCont: 'Contacto',
+      perfilT1: 'Quién hay detrás del', perfilT2: 'código',
+      perfilP1: '[PÁRRAFO 1 — tu recorrido: cómo llegaste al desarrollo, dónde trabajas hoy y qué tipo de problemas resuelves mejor que nadie.]',
+      perfilP2: '[PÁRRAFO 2 — cómo trabajas dentro de un equipo, qué te importa del código y del producto, y qué buscas ahora.]',
+      perfilMeta: [
+        { k: 'Rol', v: '[TU ROL ACTUAL]' },
+        { k: 'Base', v: '[CIUDAD, PAÍS]' },
+        { k: 'Idiomas', v: '[ESPAÑOL · INGLÉS]' },
+        { k: 'Modalidad', v: 'Remoto / Híbrido' }
+      ],
+      stackHint: 'Sustituir por tu stack real', stackT1: 'Lo que', stackT2: 'manejo',
+      tabs: ['Frontend', 'Backend', 'Datos e infra', 'Herramientas'],
+      groups: [
+        [
+          { name: 'React', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Next.js', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'TypeScript', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Tailwind CSS', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Sass', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Vite', note: '[Para qué lo usas y desde cuándo.]' }
+        ],
+        [
+          { name: 'Node.js', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Express', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'NestJS', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'REST', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'GraphQL', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'JWT / OAuth', note: '[Para qué lo usas y desde cuándo.]' }
+        ],
+        [
+          { name: 'PostgreSQL', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'MongoDB', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Prisma', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Docker', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'AWS', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Vercel', note: '[Para qué lo usas y desde cuándo.]' }
+        ],
+        [
+          { name: 'Git', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'GitHub Actions', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Jest', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Testing Library', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Figma', note: '[Para qué lo usas y desde cuándo.]' },
+          { name: 'Scrum', note: '[Para qué lo usas y desde cuándo.]' }
+        ]
+      ],
+      trayHint: 'Pulsa un hito', trayT1: 'Una', trayT2: 'línea', trayT3: 'de tiempo, no un currículum',
+      hitos: [
+        {
+          year: '[AÑO]', org: '[PRIMER PASO]', period: '[AÑO] — [AÑO] · Hito 01',
+          role: '[PRIMER CARGO O PROYECTO]', place: '[POR TU CUENTA] · [CIUDAD]',
+          desc: '[Cómo empezaste: qué te llevó al desarrollo y con qué construiste tus primeras cosas.]',
+          bullets: [{ t: '[Lo primero que sacaste adelante tú solo.]' }, { t: '[Lo que aprendiste ahí y sigues usando hoy.]' }],
+          chips: [{ c: '[TECNOLOGÍA]' }, { c: '[TECNOLOGÍA]' }]
+        },
+        {
+          year: '[AÑO]', org: '[EMPRESA]', period: '[AÑO] — [AÑO] · Hito 02',
+          role: '[PRIMER CARGO PROFESIONAL]', place: '[EMPRESA] · [CIUDAD / Remoto]',
+          desc: '[Qué hacías ahí y de qué eras responsable. Una frase, sin adornos.]',
+          bullets: [{ t: '[Un logro concreto, con cifra si la tienes.]' }, { t: '[Algo que mejoraste para el equipo, no solo para el producto.]' }],
+          chips: [{ c: '[TECNOLOGÍA]' }, { c: '[TECNOLOGÍA]' }, { c: '[TECNOLOGÍA]' }]
+        },
+        {
+          year: '[AÑO]', org: '[EMPRESA]', period: '[AÑO] — [AÑO] · Hito 03',
+          role: '[CARGO INTERMEDIO]', place: '[EMPRESA] · [CIUDAD / Remoto]',
+          desc: '[El salto: qué responsabilidad nueva asumiste y qué construiste.]',
+          bullets: [{ t: '[Logro con impacto medible: rendimiento, usuarios, ingresos.]' }, { t: '[Decisión técnica de la que sigues orgulloso.]' }, { t: '[Algo que aprendiste por las malas.]' }],
+          chips: [{ c: '[TECNOLOGÍA]' }, { c: '[TECNOLOGÍA]' }, { c: '[TECNOLOGÍA]' }]
+        },
+        {
+          year: '[AÑO]', org: '[FORMACIÓN]', period: '[AÑO] · Hito 04',
+          role: '[TÍTULO O CERTIFICACIÓN]', place: '[INSTITUCIÓN]',
+          desc: '[Qué formación o certificación sumaste y por qué la elegiste.]',
+          bullets: [{ t: '[Qué te desbloqueó en el trabajo del día a día.]' }, { t: '[Otras certificaciones relevantes.]' }],
+          chips: [{ c: '[ÁREA]' }, { c: '[ÁREA]' }]
+        },
+        {
+          year: 'Hoy', org: '[EMPRESA ACTUAL]', period: '[AÑO] — Actualidad · Hito 05',
+          role: '[CARGO ACTUAL]', place: '[EMPRESA] · [CIUDAD / Remoto]',
+          desc: '[Qué construyes hoy, para quién y con qué equipo.]',
+          bullets: [{ t: '[Logro reciente con una cifra: rendimiento, usuarios, ingresos, tiempo de entrega.]' }, { t: '[De qué eres referente dentro del equipo.]' }, { t: '[Qué quieres construir a continuación.]' }],
+          chips: [{ c: '[TECNOLOGÍA]' }, { c: '[TECNOLOGÍA]' }, { c: '[TECNOLOGÍA]' }]
+        }
+      ],
+      proyAll: 'Todos en GitHub', proyT1: 'Trabajo', proyT2: 'seleccionado', proyCta: 'Ver en GitHub',
+      capture: '[ Captura del proyecto ]', prev: 'Anterior', next: 'Siguiente', projectWord: 'Proyecto',
+      projects: [
+        { name: '[NOMBRE DEL PROYECTO 01]', desc: '[Qué problema resuelve, para quién y qué parte construiste tú. Dos líneas bastan.]', stack: '[STACK · STACK · STACK]', url: 'https://github.com/[TU-USUARIO]/[REPO-1]' },
+        { name: '[NOMBRE DEL PROYECTO 02]', desc: '[Qué problema resuelve, para quién y qué parte construiste tú. Dos líneas bastan.]', stack: '[STACK · STACK]', url: 'https://github.com/[TU-USUARIO]/[REPO-2]' },
+        { name: '[NOMBRE DEL PROYECTO 03]', desc: '[Qué problema resuelve, para quién y qué parte construiste tú. Dos líneas bastan.]', stack: '[STACK · STACK]', url: 'https://github.com/[TU-USUARIO]/[REPO-3]' },
+        { name: '[NOMBRE DEL PROYECTO 04]', desc: '[Qué problema resuelve, para quién y qué parte construiste tú. Dos líneas bastan.]', stack: '[STACK · STACK]', url: 'https://github.com/[TU-USUARIO]/[REPO-4]' },
+        { name: '[NOMBRE DEL PROYECTO 05]', desc: '[Qué problema resuelve, para quién y qué parte construiste tú. Dos líneas bastan.]', stack: '[STACK · STACK]', url: 'https://github.com/[TU-USUARIO]/[REPO-5]' }
+      ],
+      contT1: '¿Hablamos de tu', contT2: 'próximo', contT3: 'proyecto?',
+      contSub: 'Cuéntame qué necesitas construir y te respondo en menos de 24 horas hábiles.'
+    };
+
+    const en = {
+      name: '[YOUR NAME]',
+      nav: [
+        { label: '01 Profile', href: '#perfil' },
+        { label: '02 Stack', href: '#stack' },
+        { label: '03 Timeline', href: '#trayectoria' },
+        { label: '04 Projects', href: '#proyectos' },
+        { label: '05 Contact', href: '#contacto' }
+      ],
+      cv: 'Download CV', cvPdf: 'CV (PDF)', mail: 'Email',
+      langNext: 'ES', langTitle: 'Cambiar a español', themeTitle: 'Switch theme',
+      heroA: 'Web engineering with product', heroB: 'judgement', heroC: 'and an eye for the details.',
+      lede: '[ONE OR TWO SENTENCES ABOUT YOU: what you build, who for, and the outcome. Write it in your own voice.]',
+      stats: [
+        { n: '[X]+', l: 'Years building' },
+        { n: '[X]', l: 'Shipped to production' },
+        { n: '[X]', l: 'Teams' }
+      ],
+      ctaProy: 'See projects', photo: '[ Your photo ]', fig: 'Fig. 01', figPlace: '[CITY, COUNTRY]',
+      remote: 'Available remotely', rights: 'All rights reserved.',
+      secPerfil: 'Profile', secStack: 'Stack', secTray: 'Timeline', secProy: 'Projects', secCont: 'Contact',
+      perfilT1: 'Who is behind the', perfilT2: 'code',
+      perfilP1: '[PARAGRAPH 1 — your path: how you got into development, where you work today and which problems you solve best.]',
+      perfilP2: '[PARAGRAPH 2 — how you work inside a team, what you care about in code and product, and what you are looking for now.]',
+      perfilMeta: [
+        { k: 'Role', v: '[YOUR CURRENT ROLE]' },
+        { k: 'Based in', v: '[CITY, COUNTRY]' },
+        { k: 'Languages', v: '[SPANISH · ENGLISH]' },
+        { k: 'Setup', v: 'Remote / Hybrid' }
+      ],
+      stackHint: 'Replace with your real stack', stackT1: 'What I', stackT2: 'work with',
+      tabs: ['Frontend', 'Backend', 'Data & infra', 'Tooling'],
+      groups: [
+        [
+          { name: 'React', note: '[What you use it for and since when.]' },
+          { name: 'Next.js', note: '[What you use it for and since when.]' },
+          { name: 'TypeScript', note: '[What you use it for and since when.]' },
+          { name: 'Tailwind CSS', note: '[What you use it for and since when.]' },
+          { name: 'Sass', note: '[What you use it for and since when.]' },
+          { name: 'Vite', note: '[What you use it for and since when.]' }
+        ],
+        [
+          { name: 'Node.js', note: '[What you use it for and since when.]' },
+          { name: 'Express', note: '[What you use it for and since when.]' },
+          { name: 'NestJS', note: '[What you use it for and since when.]' },
+          { name: 'REST', note: '[What you use it for and since when.]' },
+          { name: 'GraphQL', note: '[What you use it for and since when.]' },
+          { name: 'JWT / OAuth', note: '[What you use it for and since when.]' }
+        ],
+        [
+          { name: 'PostgreSQL', note: '[What you use it for and since when.]' },
+          { name: 'MongoDB', note: '[What you use it for and since when.]' },
+          { name: 'Prisma', note: '[What you use it for and since when.]' },
+          { name: 'Docker', note: '[What you use it for and since when.]' },
+          { name: 'AWS', note: '[What you use it for and since when.]' },
+          { name: 'Vercel', note: '[What you use it for and since when.]' }
+        ],
+        [
+          { name: 'Git', note: '[What you use it for and since when.]' },
+          { name: 'GitHub Actions', note: '[What you use it for and since when.]' },
+          { name: 'Jest', note: '[What you use it for and since when.]' },
+          { name: 'Testing Library', note: '[What you use it for and since when.]' },
+          { name: 'Figma', note: '[What you use it for and since when.]' },
+          { name: 'Scrum', note: '[What you use it for and since when.]' }
+        ]
+      ],
+      trayHint: 'Tap a milestone', trayT1: 'A', trayT2: 'timeline', trayT3: 'rather than a résumé',
+      hitos: [
+        {
+          year: '[YEAR]', org: '[FIRST STEP]', period: '[YEAR] — [YEAR] · Milestone 01',
+          role: '[FIRST ROLE OR PROJECT]', place: '[ON YOUR OWN] · [CITY]',
+          desc: '[How you started: what pulled you into development and what you built first.]',
+          bullets: [{ t: '[The first thing you shipped on your own.]' }, { t: '[What you learned there and still use today.]' }],
+          chips: [{ c: '[TECHNOLOGY]' }, { c: '[TECHNOLOGY]' }]
+        },
+        {
+          year: '[YEAR]', org: '[COMPANY]', period: '[YEAR] — [YEAR] · Milestone 02',
+          role: '[FIRST PROFESSIONAL ROLE]', place: '[COMPANY] · [CITY / Remote]',
+          desc: '[What you did there and what you owned. One plain sentence.]',
+          bullets: [{ t: '[A concrete win, with a number if you have one.]' }, { t: '[Something you improved for the team, not just the product.]' }],
+          chips: [{ c: '[TECHNOLOGY]' }, { c: '[TECHNOLOGY]' }, { c: '[TECHNOLOGY]' }]
+        },
+        {
+          year: '[YEAR]', org: '[COMPANY]', period: '[YEAR] — [YEAR] · Milestone 03',
+          role: '[MID-LEVEL ROLE]', place: '[COMPANY] · [CITY / Remote]',
+          desc: '[The step up: what new responsibility you took on and what you built.]',
+          bullets: [{ t: '[A win with measurable impact: performance, users, revenue.]' }, { t: '[A technical call you are still proud of.]' }, { t: '[Something you learned the hard way.]' }],
+          chips: [{ c: '[TECHNOLOGY]' }, { c: '[TECHNOLOGY]' }, { c: '[TECHNOLOGY]' }]
+        },
+        {
+          year: '[YEAR]', org: '[EDUCATION]', period: '[YEAR] · Milestone 04',
+          role: '[DEGREE OR CERTIFICATION]', place: '[INSTITUTION]',
+          desc: '[What training or certification you added and why you chose it.]',
+          bullets: [{ t: '[What it unlocked in your day-to-day work.]' }, { t: '[Other relevant certifications.]' }],
+          chips: [{ c: '[AREA]' }, { c: '[AREA]' }]
+        },
+        {
+          year: 'Today', org: '[CURRENT COMPANY]', period: '[YEAR] — Present · Milestone 05',
+          role: '[CURRENT ROLE]', place: '[COMPANY] · [CITY / Remote]',
+          desc: '[What you build today, who for and with which team.]',
+          bullets: [{ t: '[A recent win with a number: performance, users, revenue, delivery time.]' }, { t: '[What the team relies on you for.]' }, { t: '[What you want to build next.]' }],
+          chips: [{ c: '[TECHNOLOGY]' }, { c: '[TECHNOLOGY]' }, { c: '[TECHNOLOGY]' }]
+        }
+      ],
+      proyAll: 'All on GitHub', proyT1: 'Selected', proyT2: 'work', proyCta: 'View on GitHub',
+      capture: '[ Project screenshot ]', prev: 'Previous', next: 'Next', projectWord: 'Project',
+      projects: [
+        { name: '[PROJECT NAME 01]', desc: '[What it solves, who for, and which part you built. Two lines is enough.]', stack: '[STACK · STACK · STACK]', url: 'https://github.com/[YOUR-USERNAME]/[REPO-1]' },
+        { name: '[PROJECT NAME 02]', desc: '[What it solves, who for, and which part you built. Two lines is enough.]', stack: '[STACK · STACK]', url: 'https://github.com/[YOUR-USERNAME]/[REPO-2]' },
+        { name: '[PROJECT NAME 03]', desc: '[What it solves, who for, and which part you built. Two lines is enough.]', stack: '[STACK · STACK]', url: 'https://github.com/[YOUR-USERNAME]/[REPO-3]' },
+        { name: '[PROJECT NAME 04]', desc: '[What it solves, who for, and which part you built. Two lines is enough.]', stack: '[STACK · STACK]', url: 'https://github.com/[YOUR-USERNAME]/[REPO-4]' },
+        { name: '[PROJECT NAME 05]', desc: '[What it solves, who for, and which part you built. Two lines is enough.]', stack: '[STACK · STACK]', url: 'https://github.com/[YOUR-USERNAME]/[REPO-5]' }
+      ],
+      contT1: 'Shall we talk about your', contT2: 'next', contT3: 'project?',
+      contSub: 'Tell me what you need to build and I will get back to you within one business day.'
+    };
+
+    return { es: es, en: en };
+  }
+
+  pad(n) {
+    return (n < 9 ? '0' : '') + (n + 1);
+  }
+
+  renderVals() {
+    const dark = (this.state.theme || this.props.theme || 'oscuro') !== 'claro';
+    const lang = this.state.lang || this.props.lang || 'es';
+    const t = this.dict()[lang === 'en' ? 'en' : 'es'];
+
+    const sel = this.state.hito;
+    const cat = this.state.cat;
+    const pj = this.state.proj;
+    const total = t.projects.length;
+
+    return {
+      t: t,
+      themeClass: dark ? 'thm dark' : 'thm light',
+      isDark: dark,
+      isLight: !dark,
+      toggleTheme: () => this.setState({ theme: dark ? 'claro' : 'oscuro' }),
+      setEs: () => this.setState({ lang: 'es' }),
+      setEn: () => this.setState({ lang: 'en' }),
+      esCls: lang === 'en' ? '' : 'on',
+      enCls: lang === 'en' ? 'on' : '',
+
+      fill: (sel * 20) + '%',
+      nodes: t.hitos.map((h, i) => ({
+        year: h.year, org: h.org,
+        cls: i === sel ? 'on' : '',
+        pick: () => this.setState({ hito: i })
+      })),
+      hito: t.hitos[sel],
+
+      tabs: t.tabs.map((label, i) => ({
+        label: label,
+        cls: i === cat ? 'on' : '',
+        pick: () => this.setState({ cat: i })
+      })),
+      stackItems: t.groups[cat],
+
+      proj: t.projects[pj],
+      counter: this.pad(pj) + ' / ' + this.pad(total - 1),
+      dots: t.projects.map((p, i) => ({
+        cls: i === pj ? 'on' : '',
+        title: t.projectWord + ' ' + this.pad(i),
+        pick: () => this.setState({ proj: i })
+      })),
+      prevProj: () => this.setState({ proj: (pj - 1 + total) % total }),
+      nextProj: () => this.setState({ proj: (pj + 1) % total })
+    };
+  }
+}
+</script>
+</body>
+</html>

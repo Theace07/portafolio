@@ -1,0 +1,34 @@
+{
+  "pages": [
+    { "id": "page-1", "name": "Portafolio" },
+    { "id": "page-2", "name": "Descartadas" }
+  ],
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Escritorio · 1440", "page": "page-1", "x": 0, "y": 0, "w": 1440, "h": 4500, "is_interactive": true },
+    { "file": "Tablet.dc.html", "title": "Tablet · 834", "page": "page-1", "x": 1600, "y": 0, "w": 834, "h": 4700, "is_interactive": true },
+    { "file": "Movil.dc.html", "title": "Móvil · 390", "page": "page-1", "x": 2600, "y": 0, "w": 390, "h": 5700, "is_interactive": true },
+    { "file": "MixDossier.dc.html", "title": "Mezcla 2 · Dossier dividido", "page": "page-2", "x": 0, "y": 0, "w": 1440, "h": 4500 },
+    { "file": "OpcionA.dc.html", "title": "Opción A · Editorial ejecutivo", "page": "page-2", "x": 1600, "y": 0, "w": 1440, "h": 4300 },
+    { "file": "OpcionB.dc.html", "title": "Opción B · Técnico oscuro", "page": "page-2", "x": 3200, "y": 0, "w": 1440, "h": 3900 },
+    { "file": "OpcionC.dc.html", "title": "Opción C · Suizo audaz", "page": "page-2", "x": 4800, "y": 0, "w": 1440, "h": 5000 }
+  ],
+  "annotations": [
+    {
+      "id": "brief-v3",
+      "x": 0,
+      "y": -300,
+      "w": 1400,
+      "page": "page-1",
+      "text": "Tres tamaños del mismo portafolio: escritorio, tablet y móvil. Los tres funcionan de verdad: botón de idioma ES/EN, botón de tema (solo icono), pestañas en el stack, línea de tiempo pulsable y galería de proyectos con flechas y puntos, donde cada ficha enlaza a su repositorio.\n\nSe fue la barra superior de 'Disponible / Edición 2026'. Paleta nueva: petróleo profundo con acento coral y verde agua para las marcas pequeñas.\n\nTodos los textos, en los dos idiomas, viven en el bloque de datos del artboard: los huecos [CORCHETES] se rellenan ahí. Las tecnologías siguen siendo de ejemplo."
+    },
+    {
+      "id": "nota-descartes",
+      "x": 0,
+      "y": -160,
+      "w": 700,
+      "page": "page-2",
+      "text": "Propuestas descartadas, guardadas por si quieres rescatar alguna idea suelta."
+    }
+  ],
+  "launch": { "view": "canvas", "page": "page-1" }
+}
