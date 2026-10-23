@@ -54,7 +54,8 @@ export function Projects() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${copy.name} — ${projects.cta}`}
-          className="group block min-w-0 overflow-hidden border border-line transition-colors hover:border-accent lg:col-span-7"
+          data-tilt="6"
+          className="tilt glare group block min-w-0 overflow-hidden border border-line hover:border-accent lg:col-span-7"
         >
           <div key={active} className="unveil-x relative">
           {link.image ? (

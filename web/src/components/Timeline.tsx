@@ -113,7 +113,8 @@ export function Timeline() {
       <div className="px-5 md:px-10 lg:px-16">
         <article
           key={active}
-          className="spotlight mt-6 border border-line bg-surface-2 px-[22px] py-6 md:px-8 md:py-7 lg:mt-[46px] lg:grid lg:grid-cols-12 lg:gap-10 lg:px-11 lg:py-10">
+          data-tilt="2"
+          className="spotlight tilt mt-6 border border-line bg-surface-2 px-[22px] py-6 md:px-8 md:py-7 lg:mt-[46px] lg:grid lg:grid-cols-12 lg:gap-10 lg:px-11 lg:py-10">
           <div className="swap-in lg:col-span-5">
             <p className="tag m-0 text-accent">{current.period}</p>
             <h3 className="mt-2.5 font-display text-[27px] font-bold tracking-[-0.02em] leading-[1.12] md:text-[32px] lg:mt-3.5 lg:text-[38px] lg:leading-[1.1]">
