@@ -2,14 +2,14 @@
 
 import { useSite } from "@/lib/site-context";
 import { sectionIds, site } from "@/lib/site";
-import { mailtoHref } from "@/lib/mailto";
 import { ArrowRight, ArrowUpRight } from "@/components/icons";
 import { Reveal } from "@/components/motion/Reveal";
 
 export function Contact() {
   const { t } = useSite();
   const contact = t.contact;
-  const mailto = mailtoHref(contact.mailSubject, contact.mailBody);
+  // El número sin espacios para el enlace tel:, que abre la llamada en el móvil.
+  const tel = `tel:${site.phone.replace(/\s/g, "")}`;
 
   return (
     <section
@@ -30,10 +30,10 @@ export function Contact() {
 
         <div className="flex flex-col gap-2.5 lg:col-span-5 lg:gap-[11px]">
           <a
-            href={mailto}
+            href={tel}
             className="shine group flex items-center justify-between gap-3 bg-accent px-[18px] py-4 text-sm font-semibold text-accent-fg transition-[background-color,transform] hover:bg-accent-strong active:scale-[0.98] lg:px-6 lg:py-[18px] lg:text-[15px]"
           >
-            <span className="truncate">{site.email}</span>
+            <span className="truncate">{site.phone}</span>
             <ArrowRight size={17} className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
           <a

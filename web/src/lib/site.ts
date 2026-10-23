@@ -6,7 +6,6 @@ export const site = {
   name: "Samuel Felipe Quiroz Piñeros",
   /** Versión corta para la cabecera, donde el nombre completo no cabe. */
   shortName: "Samuel Quiroz",
-  email: "sfqp2003@gmail.com",
   phone: "+57 305 447 1598",
   github: "https://github.com/Theace07",
   githubRepos: "https://github.com/Theace07?tab=repositories",

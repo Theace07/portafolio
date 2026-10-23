@@ -19,7 +19,7 @@ Otros comandos: `npm run build`, `npm start`, `npm run typecheck`.
 
 | Qué                                            | Archivo                        |
 | ---------------------------------------------- | ------------------------------ |
-| Nombre, correo, teléfono, GitHub, LinkedIn, CV | `src/lib/site.ts`              |
+| Nombre, teléfono, GitHub, LinkedIn, CV         | `src/lib/site.ts`              |
 | Repositorios, stack y capturas de proyectos    | `src/lib/site.ts`              |
 | Todos los textos, en español e inglés          | `src/lib/content.ts`           |
 | Colores, tipografías y tramas                  | `src/app/globals.css`          |
