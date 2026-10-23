@@ -54,8 +54,9 @@ export function Projects() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${copy.name} — ${projects.cta}`}
-          className="block min-w-0 overflow-hidden border border-line transition-colors hover:border-accent lg:col-span-7"
+          className="group block min-w-0 overflow-hidden border border-line transition-colors hover:border-accent lg:col-span-7"
         >
+          <div key={active} className="unveil-x relative">
           {link.image ? (
             <Image
               src={link.image}
@@ -63,16 +64,23 @@ export function Projects() {
               width={1280}
               height={720}
               sizes="(min-width: 1024px) 60vw, 100vw"
-              className="aspect-video w-full object-cover"
+              className="aspect-video w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
             />
           ) : (
             <div className="hatch flex aspect-video items-center justify-center">
               <span className="tag text-faint">{projects.capture}</span>
             </div>
           )}
+          {/* Velo con el CTA que aparece al pasar por encima. */}
+          <span className="absolute inset-0 flex items-end bg-gradient-to-t from-bg/85 via-bg/10 to-transparent p-5 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+            <span className="tag flex items-center gap-2 text-fg">
+              {projects.cta} <ArrowUpRight size={14} className="text-accent" />
+            </span>
+          </span>
+          </div>
         </a>
 
-        <div className="flex min-w-0 flex-col gap-4 lg:col-span-5 lg:gap-[18px] lg:pt-1">
+        <div key={active} className="swap-in flex min-w-0 flex-col gap-4 lg:col-span-5 lg:gap-[18px] lg:pt-1">
           <div className="flex items-center justify-between gap-3">
             <span className="tag text-aqua">
               {pad(active)} / {pad(total - 1)}
@@ -91,10 +99,13 @@ export function Projects() {
             href={link.repo}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-1 flex items-center justify-between bg-accent px-5 py-4 text-[15px] font-semibold text-accent-fg transition-colors hover:bg-accent-strong lg:px-6"
+            className="shine group/cta mt-1 flex items-center justify-between bg-accent px-5 py-4 text-[15px] font-semibold text-accent-fg transition-[background-color,transform] hover:bg-accent-strong active:scale-[0.98] lg:px-6"
           >
             {projects.cta}
-            <ArrowUpRight size={17} />
+            <ArrowUpRight
+              size={17}
+              className="transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
+            />
           </a>
 
           {link.demo ? (

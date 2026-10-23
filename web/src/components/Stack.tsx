@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { useSite } from "@/lib/site-context";
 import { sectionIds } from "@/lib/site";
 import { SectionHead, SectionTitle } from "@/components/SectionHead";
@@ -59,15 +59,20 @@ export function Stack() {
         id="stack-panel"
         role="tabpanel"
         aria-labelledby={`stack-tab-${active}`}
-        className="mt-6 grid gap-2.5 px-5 md:grid-cols-2 md:gap-3.5 md:px-10 lg:mt-7 lg:grid-cols-3 lg:gap-4 lg:px-16"
+        key={`${stack.section}-${active}`}
+        className="stagger mt-6 grid gap-2.5 px-5 md:grid-cols-2 md:gap-3.5 md:px-10 lg:mt-7 lg:grid-cols-3 lg:gap-4 lg:px-16"
       >
         {group.items.map((tech, index) => (
           <article
             key={index}
-            className="border border-line-soft bg-surface-2 px-[18px] py-4 transition-[border-color,transform] duration-200 hover:-translate-y-[3px] hover:border-accent lg:px-[22px] lg:py-5"
+            style={{ "--i": index } as CSSProperties}
+            className="spotlight group border border-line-soft bg-surface-2 px-[18px] py-4 transition-[border-color,transform] duration-300 hover:-translate-y-[3px] hover:border-accent lg:px-[22px] lg:py-5"
           >
             <h3 className="flex items-center gap-2.5 text-base font-semibold lg:text-lg">
-              <span className="block h-[7px] w-[7px] bg-aqua" aria-hidden />
+              <span
+                className="block h-[7px] w-[7px] bg-aqua transition-transform duration-500 group-hover:rotate-45 group-hover:scale-125"
+                aria-hidden
+              />
               {tech.name}
             </h3>
             <p className="mt-2 text-[13px] leading-[1.6] text-muted lg:text-sm">{tech.note}</p>
