@@ -65,7 +65,7 @@
   --color-aqua: var(--aqua);
 
   --font-sans: var(--font-manrope), "Segoe UI", system-ui, sans-serif;
-  --font-serif: var(--font-instrument), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-syne), "Segoe UI", system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "Courier New", monospace;
 }
 

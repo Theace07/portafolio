@@ -61,10 +61,10 @@ export function SectionTitle({ start, accent, end, className = "" }: SectionTitl
     <h2
       ref={ref}
       data-shown={inView || undefined}
-      className={`words mt-4 font-serif text-[32px] leading-[1.1] tracking-[-0.02em] md:text-[38px] lg:mt-6 lg:text-[46px] ${className}`}
+      className={`words mt-4 font-display text-[30px] font-bold leading-[1.1] tracking-[-0.03em] md:text-[38px] lg:mt-6 lg:text-[46px] ${className}`}
     >
       <Words text={start} from={0} />{" "}
-      <em className="ink text-accent">
+      <em className="ink text-accent not-italic">
         <Words text={accent} from={startCount} />
       </em>
       {end ? (

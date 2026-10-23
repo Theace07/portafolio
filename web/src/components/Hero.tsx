@@ -24,7 +24,7 @@ export function Hero() {
         <span className="caret" aria-hidden />
       </p>
       <h1
-        className="intro mt-4 max-w-[1180px] font-serif text-[38px] leading-[1.04] tracking-[-0.02em] text-balance md:text-[58px] md:leading-[1] lg:mt-6 lg:text-[84px] lg:leading-[0.98] lg:tracking-[-0.025em]"
+        className="intro mt-4 max-w-[1180px] font-display text-[34px] font-bold leading-[1.04] tracking-[-0.03em] text-balance md:text-[52px] md:leading-[1] lg:mt-6 lg:text-[76px] lg:leading-[0.98] lg:tracking-[-0.035em]"
         style={delay(120)}
       >
         <Scramble text={site.name} duration={1300} delay={150} />
@@ -61,7 +61,7 @@ export function Hero() {
 
         <div className="flex min-w-0 flex-col gap-6 lg:col-span-7 lg:gap-[30px]">
           <p
-            className="intro max-w-[600px] font-serif text-xl italic leading-[1.5] text-fg-2 md:text-[23px] lg:text-[25px]"
+            className="intro max-w-[600px] text-lg font-medium leading-[1.6] text-fg-2 md:text-xl lg:text-[22px]"
             style={delay(450)}
           >
             {hero.lede}
@@ -74,7 +74,7 @@ export function Hero() {
                 className="intro flex items-baseline justify-between gap-4 border-t border-line py-4 sm:block sm:py-5 sm:pr-6"
                 style={delay(600 + index * 110)}
               >
-                <dd className="m-0 font-serif text-[34px] leading-none lg:text-[46px]">
+                <dd className="m-0 font-display text-[34px] font-bold leading-none tracking-[-0.02em] lg:text-[46px]">
                   <Scramble text={stat.value} duration={700} delay={700 + index * 110} />
                 </dd>
                 <dt className="tag text-right text-muted sm:mt-2 sm:text-left">{stat.label}</dt>

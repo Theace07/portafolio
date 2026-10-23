@@ -19,8 +19,8 @@ export function Contact() {
       <Reveal className="spotlight grid items-center gap-8 border border-line bg-accent-wash px-[22px] py-7 md:px-9 md:py-10 lg:grid-cols-12 lg:gap-10 lg:px-15 lg:py-[66px]">
         <div className="lg:col-span-7">
           <p className="tag m-0 text-aqua">§ 05 · {contact.section}</p>
-          <h2 className="mt-3.5 font-serif text-[30px] leading-[1.1] tracking-[-0.02em] md:text-[40px] lg:mt-4.5 lg:text-[52px] lg:leading-[1.06]">
-            {contact.titleStart} <em className="text-accent">{contact.titleAccent}</em>{" "}
+          <h2 className="mt-3.5 font-display text-[28px] font-bold leading-[1.1] tracking-[-0.03em] md:text-[40px] lg:mt-4.5 lg:text-[52px] lg:leading-[1.06]">
+            {contact.titleStart} <em className="text-accent not-italic">{contact.titleAccent}</em>{" "}
             {contact.titleEnd}
           </h2>
           <p className="mt-3 max-w-[480px] text-sm leading-[1.7] text-muted md:text-[15px] lg:mt-4.5 lg:text-base lg:leading-[1.75]">

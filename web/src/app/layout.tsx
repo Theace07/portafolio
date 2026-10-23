@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, JetBrains_Mono, Manrope } from "next/font/google";
+import { JetBrains_Mono, Manrope, Syne } from "next/font/google";
 import { SiteProvider, themeScript } from "@/lib/site-context";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -11,11 +11,11 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const instrument = Instrument_Serif({
+/** Títulos: display geométrica con personalidad. No tiene cursiva, a propósito. */
+const syne = Syne({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-syne",
   display: "swap",
 });
 
@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body
-        className={`${manrope.variable} ${instrument.variable} ${jetbrains.variable} font-sans antialiased`}
+        className={`${manrope.variable} ${syne.variable} ${jetbrains.variable} font-sans antialiased`}
       >
         <SiteProvider>{children}</SiteProvider>
       </body>
