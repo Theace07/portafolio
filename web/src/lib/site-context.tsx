@@ -104,7 +104,13 @@ export function useSite(): SiteState {
  */
 export const themeScript = `
 (function () {
-  document.documentElement.classList.add("js");
+  var root = document.documentElement;
+  root.classList.add("js");
+  // Red de seguridad: si React no llega a arrancar (error de red, recurso
+  // bloqueado…), se quita .js y todo lo que esperaba su animación se muestra.
+  setTimeout(function () {
+    if (!root.classList.contains("hydrated")) root.classList.remove("js");
+  }, 3500);
   try {
     var stored = localStorage.getItem(${JSON.stringify(THEME_KEY)});
     var theme = stored === "light" || stored === "dark" ? stored : ${JSON.stringify(DEFAULT_THEME)};

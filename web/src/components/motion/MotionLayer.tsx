@@ -9,6 +9,11 @@ import { useEffect } from "react";
  */
 export function MotionLayer() {
   useEffect(() => {
+    // Avisa al script de layout.tsx de que React ya está al mando.
+    document.documentElement.classList.add("hydrated");
+  }, []);
+
+  useEffect(() => {
     // En pantallas táctiles no hay puntero que seguir.
     if (!window.matchMedia("(hover: hover)").matches) return;
 

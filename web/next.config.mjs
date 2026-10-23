@@ -8,6 +8,9 @@ import { fileURLToPath } from "node:url";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   outputFileTracingRoot: dirname(fileURLToPath(import.meta.url)),
+  // En `next dev`, permite abrir la web desde otro dispositivo de la red
+  // (el móvil, por ejemplo) sin que Next bloquee sus propios recursos.
+  allowedDevOrigins: ["192.168.*.*", "10.*.*.*", "100.*.*.*"],
 };
 
 export default nextConfig;
