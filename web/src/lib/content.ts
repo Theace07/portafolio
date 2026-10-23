@@ -134,9 +134,9 @@ const es: Content = {
       "Interfaces rápidas y accesibles",
       "Dashboards y e-commerce",
     ],
-    lede: "Desarrollador Front-End con más de un año creando interfaces responsivas y rápidas con React, Next.js, TypeScript y Tailwind CSS.",
+    lede: "Desarrollador Front-End con más de dos años creando interfaces responsivas y rápidas con React, Next.js, TypeScript y Tailwind CSS.",
     stats: [
-      { value: "1+", label: "Años de experiencia" },
+      { value: "2+", label: "Años de experiencia" },
       { value: "3", label: "Clientes y equipos" },
       { value: "B2", label: "Inglés profesional" },
     ],
@@ -151,7 +151,7 @@ const es: Content = {
     titleStart: "Quién hay detrás del",
     titleAccent: "código",
     paragraphs: [
-      "Desarrollador Front-End con más de un año de experiencia creando interfaces modernas, responsivas y de alto rendimiento con React, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3 y Tailwind CSS. He entregado soluciones escalables para clientes globales, integrando APIs y sistemas backend, y optimizando SSR, SEO técnico, accesibilidad y rendimiento en entornos empresariales.",
+      "Desarrollador Front-End con más de dos años de experiencia creando interfaces modernas, responsivas y de alto rendimiento con React, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3 y Tailwind CSS. He entregado soluciones escalables para clientes globales, integrando APIs y sistemas backend, y optimizando SSR, SEO técnico, accesibilidad y rendimiento en entornos empresariales.",
       "Trabajo con Scrum y Kanban, gestiono el flujo en GitHub y participo en code review y testing automatizado, porque prefiero encontrar los errores antes de que los encuentre el cliente. Me muevo con soltura entre equipos de backend y testing, y busco un equipo donde crecer y hacerme cargo de piezas de producto de principio a fin.",
     ],
     meta: [
@@ -351,9 +351,9 @@ const en: Content = {
       "Fast, accessible interfaces",
       "Dashboards & e-commerce",
     ],
-    lede: "Front-End Developer with over a year building responsive, fast interfaces with React, Next.js, TypeScript and Tailwind CSS.",
+    lede: "Front-End Developer with over two years building responsive, fast interfaces with React, Next.js, TypeScript and Tailwind CSS.",
     stats: [
-      { value: "1+", label: "Years of experience" },
+      { value: "2+", label: "Years of experience" },
       { value: "3", label: "Clients and teams" },
       { value: "B2", label: "Professional English" },
     ],
@@ -368,7 +368,7 @@ const en: Content = {
     titleStart: "Who is behind the",
     titleAccent: "code",
     paragraphs: [
-      "Front-End Developer with more than one year of experience creating modern, responsive and high-performance interfaces with React, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3 and Tailwind CSS. I have delivered scalable solutions for global clients, integrating APIs and backend systems, and optimising SSR, technical SEO, accessibility and performance in enterprise environments.",
+      "Front-End Developer with more than two years of experience creating modern, responsive and high-performance interfaces with React, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3 and Tailwind CSS. I have delivered scalable solutions for global clients, integrating APIs and backend systems, and optimising SSR, technical SEO, accessibility and performance in enterprise environments.",
       "I work with Scrum and Kanban, run the workflow through GitHub, and take part in code review and automated testing, because I would rather find the bugs before the client does. I move comfortably between backend and testing teams, and I am looking for a team where I can grow and own product work end to end.",
     ],
     meta: [
