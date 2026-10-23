@@ -34,7 +34,6 @@ export type Content = {
   actions: {
     cv: string;
     cvShort: string;
-    email: string;
     demo: string;
     themeToDark: string;
     themeToLight: string;
@@ -97,9 +96,6 @@ export type Content = {
     titleAccent: string;
     titleEnd: string;
     lede: string;
-    /** Asunto y cuerpo con los que se abre el borrador de correo. */
-    mailSubject: string;
-    mailBody: string;
   };
   footer: {
     remote: string;
@@ -119,7 +115,6 @@ const es: Content = {
   actions: {
     cv: "Descargar CV",
     cvShort: "CV en PDF",
-    email: "Correo",
     demo: "Ver en vivo",
     themeToDark: "Cambiar a tema oscuro",
     themeToLight: "Cambiar a tema claro",
@@ -314,9 +309,6 @@ const es: Content = {
     titleAccent: "próximo",
     titleEnd: "proyecto?",
     lede: "Cuéntame qué necesitas construir y te respondo lo antes posible.",
-    mailSubject: "Hablemos de un proyecto",
-    mailBody:
-      "Hola Samuel:\n\nTe escribo desde tu portafolio.\n\nSoy:\nLo que necesito construir:\nPlazos aproximados:\n\nUn saludo.",
   },
   footer: {
     remote: "Disponible en remoto",
@@ -336,7 +328,6 @@ const en: Content = {
   actions: {
     cv: "Download CV",
     cvShort: "CV (PDF)",
-    email: "Email",
     demo: "View live",
     themeToDark: "Switch to dark theme",
     themeToLight: "Switch to light theme",
@@ -531,9 +522,6 @@ const en: Content = {
     titleAccent: "next",
     titleEnd: "project?",
     lede: "Tell me what you need to build and I will get back to you as soon as I can.",
-    mailSubject: "Let's talk about a project",
-    mailBody:
-      "Hi Samuel,\n\nI am writing from your portfolio.\n\nWho I am:\nWhat I need to build:\nRough timeline:\n\nBest regards.",
   },
   footer: {
     remote: "Available remotely",

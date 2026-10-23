@@ -75,4 +75,4 @@ Para verlo: `git log --oneline --graph`.
 
 ## Contacto
 
-[LinkedIn](https://www.linkedin.com/in/samuel-felipe-quiroz-pi%C3%B1eros-3a5327323/) · [GitHub](https://github.com/Theace07) · sfqp2003@gmail.com
+[LinkedIn](https://www.linkedin.com/in/samuel-felipe-quiroz-pi%C3%B1eros-3a5327323/) · [GitHub](https://github.com/Theace07) · +57 305 447 1598
