@@ -2,24 +2,17 @@
 
 import { useSite } from "@/lib/site-context";
 import { site } from "@/lib/site";
-import { mailtoHref } from "@/lib/mailto";
 import { Reveal } from "@/components/motion/Reveal";
 
 export function Footer() {
   const { t, lang } = useSite();
   const year = new Date().getFullYear();
 
-  // `external` abre en una pestaña nueva, para no sacar al visitante del
-  // portafolio. El correo no lo es: abre el gestor de correo, no una página.
+  // Todos abren en una pestaña nueva, para no sacar al visitante del portafolio.
   const links = [
-    { label: "LinkedIn", href: site.linkedin, external: true },
-    { label: "GitHub", href: site.github, external: true },
-    {
-      label: t.actions.email,
-      href: mailtoHref(t.contact.mailSubject, t.contact.mailBody),
-      external: false,
-    },
-    { label: t.actions.cvShort, href: site.cv[lang].href, external: true },
+    { label: "LinkedIn", href: site.linkedin },
+    { label: "GitHub", href: site.github },
+    { label: t.actions.cvShort, href: site.cv[lang].href },
   ];
 
   return (
@@ -27,9 +20,7 @@ export function Footer() {
       <Reveal className="flex flex-col justify-between gap-6 lg:flex-row lg:items-start lg:gap-10">
         <div>
           <p className="m-0 font-display text-[22px] font-bold tracking-[-0.02em] md:text-2xl lg:text-[26px]">{site.name}</p>
-          <p className="m-0 mt-2 font-mono text-[11px] text-muted lg:text-xs">
-            {site.email} · {site.phone}
-          </p>
+          <p className="m-0 mt-2 font-mono text-[11px] text-muted lg:text-xs">{site.phone}</p>
           <p className="m-0 mt-1.5 font-mono text-[11px] text-muted lg:text-xs">
             {t.hero.place} · {t.footer.remote}
           </p>
@@ -40,8 +31,8 @@ export function Footer() {
             <a
               key={index}
               href={link.href}
-              target={link.external ? "_blank" : undefined}
-              rel={link.external ? "noopener noreferrer" : undefined}
+              target="_blank"
+              rel="noopener noreferrer"
               className="border-b border-accent-ring pb-0.5 text-accent transition-colors hover:border-accent-strong hover:text-accent-strong"
             >
               {link.label}
