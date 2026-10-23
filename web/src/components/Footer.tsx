@@ -26,7 +26,7 @@ export function Footer() {
     <footer className="mt-14 border-t border-line px-5 pt-7 md:mt-[72px] md:px-10 lg:mt-24 lg:px-16 lg:pt-10">
       <Reveal className="flex flex-col justify-between gap-6 lg:flex-row lg:items-start lg:gap-10">
         <div>
-          <p className="m-0 font-serif text-[22px] md:text-2xl lg:text-[26px]">{site.name}</p>
+          <p className="m-0 font-display text-[22px] font-bold tracking-[-0.02em] md:text-2xl lg:text-[26px]">{site.name}</p>
           <p className="m-0 mt-2 font-mono text-[11px] text-muted lg:text-xs">
             {site.email} · {site.phone}
           </p>

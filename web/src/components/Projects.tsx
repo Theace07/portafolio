@@ -88,7 +88,7 @@ export function Projects() {
             <span className="tag text-right text-faint">{link.stack}</span>
           </div>
 
-          <h3 className="font-serif text-[28px] leading-[1.12] md:text-[34px] lg:text-[40px] lg:leading-[1.08]">
+          <h3 className="font-display text-[28px] font-bold tracking-[-0.02em] leading-[1.12] md:text-[34px] lg:text-[40px] lg:leading-[1.08]">
             {copy.name}
           </h3>
           <p className="text-[15px] leading-[1.7] text-muted lg:text-base lg:leading-[1.75]">
