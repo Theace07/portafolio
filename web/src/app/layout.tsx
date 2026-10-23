@@ -30,6 +30,7 @@ export const metadata: Metadata = {
   title: `${site.name} · Front-End Developer`,
   description:
     "Portafolio de Samuel Felipe Quiroz Piñeros, desarrollador Front-End: interfaces responsivas y de alto rendimiento con React, Next.js, TypeScript y Tailwind CSS.",
+  icons: { icon: "/icon.svg" },
 };
 
 export const viewport: Viewport = {

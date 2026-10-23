@@ -3,6 +3,7 @@
 import { useSite } from "@/lib/site-context";
 import { sectionIds } from "@/lib/site";
 import { SectionHead, SectionTitle } from "@/components/SectionHead";
+import { Reveal } from "@/components/motion/Reveal";
 
 export function Profile() {
   const { t } = useSite();
@@ -18,22 +19,23 @@ export function Profile() {
         </div>
 
         <div className="flex flex-col gap-4 lg:col-span-7 lg:mt-[34px] lg:gap-5">
-          <p className="text-base leading-[1.75] text-fg-2 md:text-[17px] lg:text-lg">
+          <Reveal as="p" className="text-base leading-[1.75] text-fg-2 md:text-[17px] lg:text-lg">
             {profile.paragraphs[0]}
-          </p>
-          <p className="text-[15px] leading-[1.8] text-muted lg:text-base">
+          </Reveal>
+          <Reveal as="p" delay={120} className="text-[15px] leading-[1.8] text-muted lg:text-base">
             {profile.paragraphs[1]}
-          </p>
+          </Reveal>
 
           <dl className="m-0 mt-3 grid gap-x-10 sm:grid-cols-2 lg:gap-x-[52px]">
             {profile.meta.map((row, index) => (
-              <div
+              <Reveal
                 key={index}
-                className="flex justify-between gap-3 border-t border-line py-3.5 font-mono text-[11px] lg:text-xs"
+                delay={200 + index * 70}
+                className="group flex justify-between gap-3 border-t border-line py-3.5 font-mono text-[11px] transition-colors hover:border-accent lg:text-xs"
               >
                 <dt className="text-faint">{row.key}</dt>
-                <dd className="m-0 text-right">{row.value}</dd>
-              </div>
+                <dd className="m-0 text-right transition-colors group-hover:text-accent">{row.value}</dd>
+              </Reveal>
             ))}
           </dl>
         </div>

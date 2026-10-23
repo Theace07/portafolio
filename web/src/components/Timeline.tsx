@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { useSite } from "@/lib/site-context";
 import { sectionIds } from "@/lib/site";
 import { SectionHead, SectionTitle } from "@/components/SectionHead";
@@ -63,7 +63,7 @@ export function Timeline() {
             aria-hidden
           />
           <div
-            className="absolute top-1.5 left-0 h-[3px] bg-accent transition-[width] duration-300 ease-out"
+            className="absolute top-1.5 left-0 h-[3px] bg-gradient-to-r from-aqua to-accent transition-[width] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{ width: fill }}
             aria-hidden
           />
@@ -111,8 +111,10 @@ export function Timeline() {
       </div>
 
       <div className="px-5 md:px-10 lg:px-16">
-        <article className="mt-6 border border-line bg-surface-2 px-[22px] py-6 md:px-8 md:py-7 lg:mt-[46px] lg:grid lg:grid-cols-12 lg:gap-10 lg:px-11 lg:py-10">
-          <div className="lg:col-span-5">
+        <article
+          key={active}
+          className="spotlight mt-6 border border-line bg-surface-2 px-[22px] py-6 md:px-8 md:py-7 lg:mt-[46px] lg:grid lg:grid-cols-12 lg:gap-10 lg:px-11 lg:py-10">
+          <div className="swap-in lg:col-span-5">
             <p className="tag m-0 text-accent">{current.period}</p>
             <h3 className="mt-2.5 font-serif text-[27px] leading-[1.12] md:text-[32px] lg:mt-3.5 lg:text-[38px] lg:leading-[1.1]">
               {current.role}
@@ -132,13 +134,17 @@ export function Timeline() {
             </ul>
           </div>
 
-          <div className="lg:col-span-7">
+          <div className="swap-in lg:col-span-7" style={{ animationDelay: "90ms" }}>
             <p className="mt-4 text-[15px] leading-[1.75] text-fg-2 md:text-base lg:mt-0 lg:text-[17px]">
               {current.description}
             </p>
-            <ul className="m-0 mt-4 flex list-none flex-col gap-3 p-0 lg:mt-[18px] lg:gap-[18px]">
+            <ul className="stagger m-0 mt-4 flex list-none flex-col gap-3 p-0 lg:mt-[18px] lg:gap-[18px]">
               {current.achievements.map((item, index) => (
-                <li key={index} className="flex items-start gap-3 lg:gap-3.5">
+                <li
+                  key={index}
+                  style={{ "--i": index + 2 } as CSSProperties}
+                  className="flex items-start gap-3 lg:gap-3.5"
+                >
                   <span className="mt-2 block h-[7px] w-[7px] shrink-0 bg-aqua" aria-hidden />
                   <span className="text-[15px] leading-[1.65] text-fg-2 lg:text-base lg:leading-[1.7]">
                     {item}

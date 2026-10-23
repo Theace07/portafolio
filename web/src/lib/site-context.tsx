@@ -104,6 +104,7 @@ export function useSite(): SiteState {
  */
 export const themeScript = `
 (function () {
+  document.documentElement.classList.add("js");
   try {
     var stored = localStorage.getItem(${JSON.stringify(THEME_KEY)});
     var theme = stored === "light" || stored === "dark" ? stored : ${JSON.stringify(DEFAULT_THEME)};

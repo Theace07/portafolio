@@ -3,6 +3,7 @@
 import { useSite } from "@/lib/site-context";
 import { site } from "@/lib/site";
 import { mailtoHref } from "@/lib/mailto";
+import { Reveal } from "@/components/motion/Reveal";
 
 export function Footer() {
   const { t, lang } = useSite();
@@ -23,7 +24,7 @@ export function Footer() {
 
   return (
     <footer className="mt-14 border-t border-line px-5 pt-7 md:mt-[72px] md:px-10 lg:mt-24 lg:px-16 lg:pt-10">
-      <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-start lg:gap-10">
+      <Reveal className="flex flex-col justify-between gap-6 lg:flex-row lg:items-start lg:gap-10">
         <div>
           <p className="m-0 font-serif text-[22px] md:text-2xl lg:text-[26px]">{site.name}</p>
           <p className="m-0 mt-2 font-mono text-[11px] text-muted lg:text-xs">
@@ -47,7 +48,7 @@ export function Footer() {
             </a>
           ))}
         </nav>
-      </div>
+      </Reveal>
 
       <p className="m-0 py-8 font-mono text-[10px] uppercase tracking-[0.12em] text-faint lg:pt-9 lg:pb-10 lg:text-[11px]">
         © {year} {site.name} — {t.footer.rights}
